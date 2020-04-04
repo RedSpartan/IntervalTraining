@@ -1,8 +1,6 @@
-﻿using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+﻿using Xamarin.Forms;
 using RedSpartan.IntervalTraining.Services;
-using RedSpartan.IntervalTraining.Views;
+using AutoMapper;
 
 namespace RedSpartan.IntervalTraining
 {
@@ -14,6 +12,7 @@ namespace RedSpartan.IntervalTraining
             InitializeComponent();
 
             DependencyService.Register<MockDataStore>();
+            
             MainPage = new AppShell();
         }
 
