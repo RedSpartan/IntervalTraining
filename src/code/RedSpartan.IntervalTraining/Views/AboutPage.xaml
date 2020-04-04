@@ -6,11 +6,8 @@
              mc:Ignorable="d"
              x:Class="RedSpartan.IntervalTraining.Views.AboutPage"
              xmlns:vm="clr-namespace:RedSpartan.IntervalTraining.ViewModels"
+             BindingContext="{Binding About, Source={StaticResource ViewModelLocator}}"
              Title="{Binding Title}">
-    
-    <ContentPage.BindingContext>
-        <vm:AboutViewModel />
-    </ContentPage.BindingContext>
     
     <ContentPage.Resources>
         <ResourceDictionary>

@@ -9,7 +9,7 @@ namespace RedSpartan.IntervalTraining.ViewModels
     {
         public AboutViewModel()
         {
-            Title = "About";
+            Title = "About More";
             OpenWebCommand = new Command(async () => await Browser.OpenAsync("https://xamarin.com"));
         }
 
