@@ -1,7 +1,7 @@
 ﻿using Autofac;
 using RedSpartan.IntervalTraining.ViewModels;
 
-namespace RedSpartan.IntervalTraining.Services
+namespace RedSpartan.IntervalTraining.Bootstrap
 {
     public class AppSetup
     {

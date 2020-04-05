@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using RedSpartan.IntervalTraining.Bootstrap;
 using RedSpartan.IntervalTraining.ViewModels;
 
 namespace RedSpartan.IntervalTraining.Services

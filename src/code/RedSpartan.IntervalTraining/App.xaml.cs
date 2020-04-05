@@ -1,9 +1,6 @@
 ﻿using Xamarin.Forms;
 using RedSpartan.IntervalTraining.Services;
-using AutoMapper;
-using RedSpartan.IntervalTraining.Repository.Services;
-using RedSpartan.IntervalTraining.Repository.DTOs;
-using RedSpartan.IntervalTraining.Repository;
+using RedSpartan.IntervalTraining.Bootstrap;
 
 namespace RedSpartan.IntervalTraining
 {
