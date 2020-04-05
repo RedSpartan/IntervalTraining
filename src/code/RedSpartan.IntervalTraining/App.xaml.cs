@@ -13,14 +13,12 @@ namespace RedSpartan.IntervalTraining
         public App()
         {
             InitializeComponent();
-
+            AppContainer.Container = new AppSetup().CreateContainer();
             DependencyService.Register<MockDataStore>();
-            DependencyService.Register<IDataService<HistoryDto>, HistoryDataService>();
+            /*DependencyService.Register<IDataService<HistoryDto>, HistoryDataService>();
             DependencyService.Register<IDataService<IntervalTemplateDto>, IntervalDataService>();
             DependencyService.Register<DatabaseContext>();
-            DependencyService.Register<IMapper, Mapper>();
-            
-
+            DependencyService.Register<IMapper, Mapper>();*/
 
             MainPage = new AppShell();
         }
