@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RedSpartan.IntervalTraining.Models;
+using RedSpartan.IntervalTraining.Services;
 using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;

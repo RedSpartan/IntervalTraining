@@ -1,6 +1,4 @@
-﻿using System;
-
-using RedSpartan.IntervalTraining.Models;
+﻿using RedSpartan.IntervalTraining.Models;
 
 namespace RedSpartan.IntervalTraining.ViewModels
 {

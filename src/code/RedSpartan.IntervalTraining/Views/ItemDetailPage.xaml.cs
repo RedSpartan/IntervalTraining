@@ -1,10 +1,9 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 using RedSpartan.IntervalTraining.Models;
 using RedSpartan.IntervalTraining.ViewModels;
+using System.Collections.Generic;
 
 namespace RedSpartan.IntervalTraining.Views
 {
@@ -13,13 +12,13 @@ namespace RedSpartan.IntervalTraining.Views
     [DesignTimeVisible(false)]
     public partial class ItemDetailPage : ContentPage
     {
-        ItemDetailViewModel viewModel;
+        ItemDetailViewModel _viewModel;
 
         public ItemDetailPage(ItemDetailViewModel viewModel)
         {
             InitializeComponent();
 
-            BindingContext = this.viewModel = viewModel;
+            BindingContext = this._viewModel = viewModel;
         }
 
         public ItemDetailPage()
@@ -31,9 +30,9 @@ namespace RedSpartan.IntervalTraining.Views
                 Text = "Item 1",
                 Description = "This is an item description."
             };
-
-            viewModel = new ItemDetailViewModel(item);
-            BindingContext = viewModel;
+            
+            _viewModel = new ItemDetailViewModel(item);
+            BindingContext = _viewModel;
         }
     }
 }

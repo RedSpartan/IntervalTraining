@@ -7,6 +7,7 @@ using Xamarin.Forms;
 
 using RedSpartan.IntervalTraining.Models;
 using RedSpartan.IntervalTraining.Views;
+using RedSpartan.IntervalTraining.Services;
 
 namespace RedSpartan.IntervalTraining.ViewModels
 {

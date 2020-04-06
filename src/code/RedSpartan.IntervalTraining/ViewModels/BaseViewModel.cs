@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-using Xamarin.Forms;
-
 using RedSpartan.IntervalTraining.Models;
 using RedSpartan.IntervalTraining.Services;
+using Xamarin.Forms;
 
 namespace RedSpartan.IntervalTraining.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
+        public IDataStore<Item> DataStore { get; } = DependencyService.Get<IDataStore<Item>>();
 
         bool isBusy = false;
         public bool IsBusy
@@ -26,6 +25,11 @@ namespace RedSpartan.IntervalTraining.ViewModels
         {
             get { return title; }
             set { SetProperty(ref title, value); }
+        }
+
+        public BaseViewModel()
+        {
+            //DataStore = dataStore;
         }
 
         protected bool SetProperty<T>(ref T backingStore, T value,
