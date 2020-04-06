@@ -22,8 +22,6 @@ namespace RedSpartan.IntervalTraining.Bootstrap
 
         protected virtual void RegisterDependencies(ContainerBuilder cb)
         {
-            DependencyService.Register<IDataStore<Item>, MockDataStore>();
-
             cb.RegisterType<AboutViewModel>();
             cb.RegisterType<ItemsViewModel>();
             cb.RegisterType<ItemsViewModel>();
