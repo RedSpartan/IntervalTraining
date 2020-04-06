@@ -13,6 +13,7 @@ namespace RedSpartan.IntervalTraining.ViewModels
 {
     public class ItemsViewModel : BaseViewModel
     {
+        public IDataStore<Item> DataStore { get; } = DependencyService.Get<IDataStore<Item>>();
         public ObservableCollection<Item> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
 

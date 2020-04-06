@@ -12,20 +12,23 @@ namespace RedSpartan.IntervalTraining.Views
     [DesignTimeVisible(false)]
     public partial class ItemsPage : ContentPage
     {
-        ItemsViewModel _viewModel;
+        private readonly ItemsViewModel _viewModel;
 
         public ItemsPage()
         {
             InitializeComponent();
-
-            BindingContext = _viewModel = new ItemsViewModel();
+            if (BindingContext is ItemsViewModel viewModel)
+            { 
+                _viewModel = viewModel; 
+            }
         }
 
         async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
-            var item = args.SelectedItem as Item;
-            if (item == null)
+            if (!(args.SelectedItem is Item item))
+            {
                 return;
+            }
 
             await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item)));
 

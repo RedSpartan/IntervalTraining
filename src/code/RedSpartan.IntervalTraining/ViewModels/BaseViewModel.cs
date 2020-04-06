@@ -3,33 +3,22 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-using RedSpartan.IntervalTraining.Models;
-using RedSpartan.IntervalTraining.Services;
-using Xamarin.Forms;
-
 namespace RedSpartan.IntervalTraining.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Item> DataStore { get; } = DependencyService.Get<IDataStore<Item>>();
-
-        bool isBusy = false;
+        private bool _isBusy = false;
         public bool IsBusy
         {
-            get { return isBusy; }
-            set { SetProperty(ref isBusy, value); }
+            get { return _isBusy; }
+            set { SetProperty(ref _isBusy, value); }
         }
 
-        string title = string.Empty;
+        private string _title = string.Empty;
         public string Title
         {
-            get { return title; }
-            set { SetProperty(ref title, value); }
-        }
-
-        public BaseViewModel()
-        {
-            //DataStore = dataStore;
+            get { return _title; }
+            set { SetProperty(ref _title, value); }
         }
 
         protected bool SetProperty<T>(ref T backingStore, T value,

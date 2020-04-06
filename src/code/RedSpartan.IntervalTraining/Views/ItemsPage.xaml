@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="RedSpartan.IntervalTraining.Views.ItemsPage"
+             BindingContext="{Binding Items, Source={StaticResource VML}}"
              Title="{Binding Title}"
              x:Name="BrowseItemsPage">
 
