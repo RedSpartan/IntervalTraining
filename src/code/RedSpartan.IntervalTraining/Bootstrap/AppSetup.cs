@@ -25,6 +25,7 @@ namespace RedSpartan.IntervalTraining.Bootstrap
             cb.RegisterType<AboutViewModel>();
             cb.RegisterType<ItemsViewModel>();
             cb.RegisterType<ItemsViewModel>();
+            cb.RegisterType<HomeViewModel>();
 
             cb.RegisterType<DatabaseContext>();
 

@@ -9,5 +9,6 @@ namespace RedSpartan.IntervalTraining.Services
         public AboutViewModel About => AppContainer.Container.Resolve<AboutViewModel>();
         public ItemDetailViewModel ItemDetail => AppContainer.Container.Resolve<ItemDetailViewModel>();
         public ItemsViewModel Items => AppContainer.Container.Resolve<ItemsViewModel>();
+        public HomeViewModel Home => AppContainer.Container.Resolve<HomeViewModel>();
     }
 }

@@ -89,6 +89,10 @@
     <AndroidResource Include="Resources\drawable\tab_feed.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RedSpartan.IntervalTraining.Repository\RedSpartan.IntervalTraining.Repository.csproj">
+      <Project>{30e44938-f1bd-458a-aad1-c72c3302bd83}</Project>
+      <Name>RedSpartan.IntervalTraining.Repository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RedSpartan.IntervalTraining\RedSpartan.IntervalTraining.csproj">
       <Project>{235FA9EC-811F-41F5-B5C3-C059DB166781}</Project>
       <Name>RedSpartan.IntervalTraining</Name>

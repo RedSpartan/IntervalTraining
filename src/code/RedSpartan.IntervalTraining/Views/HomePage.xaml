@@ -5,7 +5,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="RedSpartan.IntervalTraining.Views.HomePage"
-             Title="Home">
+             BindingContext="{Binding Home, Source={StaticResource VML}}"
+             Title="{Binding Title}">
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
