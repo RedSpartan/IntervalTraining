@@ -10,5 +10,6 @@ namespace RedSpartan.IntervalTraining.Services
         public ItemDetailViewModel ItemDetail => AppContainer.Container.Resolve<ItemDetailViewModel>();
         public ItemsViewModel Items => AppContainer.Container.Resolve<ItemsViewModel>();
         public HomeViewModel Home => AppContainer.Container.Resolve<HomeViewModel>();
+        public NewIntervalTemplateViewModel NewIntervalTemplate => AppContainer.Container.Resolve<NewIntervalTemplateViewModel>();
     }
 }

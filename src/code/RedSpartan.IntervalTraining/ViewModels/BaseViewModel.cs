@@ -21,9 +21,10 @@ namespace RedSpartan.IntervalTraining.ViewModels
             set { SetProperty(ref _title, value); }
         }
 
-        protected bool SetProperty<T>(ref T backingStore, T value,
-            [CallerMemberName]string propertyName = "",
-            Action onChanged = null)
+        protected bool SetProperty<T>(ref T backingStore,
+            T value,
+            Action onChanged,
+            [CallerMemberName]string propertyName = "")
         {
             if (EqualityComparer<T>.Default.Equals(backingStore, value))
                 return false;
@@ -32,6 +33,13 @@ namespace RedSpartan.IntervalTraining.ViewModels
             onChanged?.Invoke();
             OnPropertyChanged(propertyName);
             return true;
+        }
+
+        protected bool SetProperty<T>(ref T backingStore, 
+            T value,
+            [CallerMemberName]string propertyName = "")
+        {
+            return SetProperty(ref backingStore, value, null, propertyName);
         }
 
         #region INotifyPropertyChanged

@@ -26,7 +26,10 @@ namespace RedSpartan.IntervalTraining.Bootstrap
             cb.RegisterType<ItemsViewModel>();
             cb.RegisterType<ItemsViewModel>();
             cb.RegisterType<HomeViewModel>();
-
+            cb.RegisterType<NewIntervalTemplateViewModel>();
+            
+            cb.RegisterType<ViewModelLocator>();
+            
             cb.RegisterType<DatabaseContext>();
 
             cb.RegisterType<MockDataStore>().As<IDataStore<Item>>();
@@ -35,6 +38,7 @@ namespace RedSpartan.IntervalTraining.Bootstrap
             
             cb.RegisterInstance(DependencyService.Get<IDevicePath>()).As<IDevicePath>().SingleInstance();
             cb.RegisterInstance(new Mapper(AuroMapperConfiguration.MapperConfiguration())).As<IMapper>().SingleInstance();
+            cb.RegisterInstance(MessagingCenter.Instance).As<IMessagingCenter>().SingleInstance();
         }
     }
 }

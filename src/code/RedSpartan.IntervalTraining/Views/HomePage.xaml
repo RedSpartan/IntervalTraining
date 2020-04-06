@@ -7,6 +7,10 @@
              x:Class="RedSpartan.IntervalTraining.Views.HomePage"
              BindingContext="{Binding Home, Source={StaticResource VML}}"
              Title="{Binding Title}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Clicked="AddItem_Clicked" />
+    </ContentPage.ToolbarItems>
+    
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
