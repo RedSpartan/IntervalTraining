@@ -14,4 +14,16 @@
   <ItemGroup>
     <ProjectReference Include="..\RedSpartan.IntervalTraining.Repository\RedSpartan.IntervalTraining.Repository.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\HomePage.xaml.cs">
+      <DependentUpon>HomePage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Views\HomePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>
