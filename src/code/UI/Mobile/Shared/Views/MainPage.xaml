@@ -9,6 +9,15 @@
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             android:TabbedPage.ToolbarPlacement="Bottom"
             Title="{Binding Title}">
-    <views:HomePage/>
-    <views:HistoryPage/>
+    <NavigationPage Title="HOME">
+        <x:Arguments>
+            <views:HomePage />
+        </x:Arguments>
+    </NavigationPage>
+    <NavigationPage Title="HISTORY">
+        <x:Arguments>
+            <views:HistoryPage/>
+        </x:Arguments>
+    </NavigationPage>
+    
 </TabbedPage>

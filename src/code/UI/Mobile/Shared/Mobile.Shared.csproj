@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Common\Common.csproj" />
-    <ProjectReference Include="..\..\..\RedSpartan.IntervalTraining.Repository\Repository.csproj" />
+    <ProjectReference Include="..\..\..\Repository\Repository.csproj" />
   </ItemGroup>
 
   <ItemGroup>

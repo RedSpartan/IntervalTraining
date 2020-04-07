@@ -2,9 +2,9 @@
 
 namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
 {
-    public class MainPageViewModel : ViewModelBase
+    public class MainViewModel : ViewModelBase
     {
-        public MainPageViewModel(INavigationService navigationService)
+        public MainViewModel(INavigationService navigationService)
             : base(navigationService)
         {
             Title = "Main Page";
