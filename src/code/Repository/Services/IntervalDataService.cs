@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using RedSpartan.IntervalTraining.Repository.Access;
 using RedSpartan.IntervalTraining.Repository.Data.Entities;
 using RedSpartan.IntervalTraining.Repository.DTOs;
 using System;
@@ -12,56 +13,71 @@ namespace RedSpartan.IntervalTraining.Repository.Services
     public class IntervalDataService : IDataService<IntervalTemplateDto>
     {
         private readonly IMapper _mapper;
-        private readonly DatabaseContext _databaseContext;
+        private readonly IContextFactory _contextFactory;
 
-        public IntervalDataService(IMapper mapper, DatabaseContext databaseContext)
+        public IntervalDataService(IMapper mapper, IContextFactory contextFactory)
         {
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-            _databaseContext = databaseContext ?? throw new ArgumentNullException(nameof(databaseContext));
+            _contextFactory = contextFactory ?? throw new ArgumentNullException(nameof(contextFactory));
         }
 
         public async Task<bool> AddItemAsync(IntervalTemplateDto item)
         {
-            _databaseContext.Intervals.Add(_mapper.Map<IntervalTemplate>(item));
+            using (var context = _contextFactory.GetContext())
+            {
+                context.Intervals.Add(_mapper.Map<IntervalTemplate>(item));
 
-            await _databaseContext.SaveChangesAsync();
+                await context.SaveChangesAsync();
 
-            return await Task.FromResult(true);
+                return await Task.FromResult(true);
+            }
         }
 
         public async Task<bool> UpdateItemAsync(IntervalTemplateDto item)
         {
-            var oldItem = await _databaseContext.Intervals.Where(x => x.Id == item.Id).FirstOrDefaultAsync();
-            _databaseContext.Intervals.Remove(oldItem);
-            _databaseContext.Intervals.Add(_mapper.Map<IntervalTemplate>(item));
-            
-            await _databaseContext.SaveChangesAsync();
+            using (var context = _contextFactory.GetContext())
+            {
+                var oldItem = await context.Intervals.Where(x => x.Id == item.Id).FirstOrDefaultAsync();
+                context.Intervals.Remove(oldItem);
+                context.Intervals.Add(_mapper.Map<IntervalTemplate>(item));
 
-            return await Task.FromResult(true);
+                await context.SaveChangesAsync();
+
+                return await Task.FromResult(true);
+            }
         }
 
         public async Task<bool> DeleteItemAsync(int id)
         {
-            var oldItem = await _databaseContext.Intervals.Where(x => x.Id == id).FirstOrDefaultAsync();
-            _databaseContext.Intervals.Remove(oldItem);
+            using (var context = _contextFactory.GetContext())
+            {
+                var oldItem = await context.Intervals.Where(x => x.Id == id).FirstOrDefaultAsync();
+                context.Intervals.Remove(oldItem);
 
-            await _databaseContext.SaveChangesAsync();
+                await context.SaveChangesAsync();
 
-            return await Task.FromResult(true);
+                return await Task.FromResult(true);
+            }
         }
 
         public async Task<IntervalTemplateDto> GetItemAsync(int id)
         {
-            var item = await _databaseContext.Intervals.Where(x => x.Id == id).FirstOrDefaultAsync();
-            
-            return _mapper.Map<IntervalTemplateDto>(item);
+            using (var context = _contextFactory.GetContext())
+            {
+                var item = await context.Intervals.Where(x => x.Id == id).FirstOrDefaultAsync();
+
+                return _mapper.Map<IntervalTemplateDto>(item);
+            }
         }
 
         public async Task<IEnumerable<IntervalTemplateDto>> GetItemsAsync(bool forceRefresh = false)
         {
-            var items = await _databaseContext.Intervals.ToListAsync().ConfigureAwait(false);
+            using (var context = _contextFactory.GetContext())
+            {
+                var items = await context.Intervals.ToListAsync().ConfigureAwait(false);
 
-            return _mapper.Map<List<IntervalTemplateDto>>(items);
+                return _mapper.Map<List<IntervalTemplateDto>>(items);
+            }
         }
     }
 }
