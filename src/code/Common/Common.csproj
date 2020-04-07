@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>RedSpartan.IntervalTraining.Common</AssemblyName>
+    <RootNamespace>RedSpartan.IntervalTraining.Common</RootNamespace>
+  </PropertyGroup>
+
+</Project>

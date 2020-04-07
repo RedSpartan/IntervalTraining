@@ -90,6 +90,7 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Services\DeviceSpecifics.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -193,6 +194,10 @@
     <PackageReference Include="Prism.DryIoc.Forms" Version="7.2.0.1422" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\Common.csproj">
+      <Project>{741199d2-fc4c-430b-bd82-6c06fa9e1536}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Shared\Mobile.Shared.csproj">
       <Project>{9d1a03bd-e443-41d5-89d6-9b28e3aa8f9b}</Project>
       <Name>Mobile.Shared</Name>
