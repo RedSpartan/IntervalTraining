@@ -10,7 +10,7 @@
              Title="{Binding Title}">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add"/>
+        <ToolbarItem Text="Add" Command="{Binding AddNewIntervalTemplateCommand}"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Grid>
