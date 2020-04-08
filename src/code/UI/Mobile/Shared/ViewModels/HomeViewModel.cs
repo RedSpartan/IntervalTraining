@@ -25,7 +25,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
 
         #region Services
         private IDataService<IntervalTemplateDto> IntervalService { get; }
-        private IntervalTemplateEvent IntervalTemplateEvent { get; }
+        private CreateIntervalTemplateEvent IntervalTemplateEvent { get; }
         private IMapper Mapper { get; }
         #endregion Services
 
@@ -38,7 +38,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
             Title = "Home";
             Mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             IntervalService = intervalService ?? throw new ArgumentNullException(nameof(intervalService));
-            IntervalTemplateEvent = eventAggregator?.GetEvent<IntervalTemplateEvent>()
+            IntervalTemplateEvent = eventAggregator?.GetEvent<CreateIntervalTemplateEvent>()
                 ?? throw new ArgumentNullException(nameof(eventAggregator));
 
             AddNewIntervalTemplateCommand = new DelegateCommand(async () => await NavigationService.NavigateAsync("NewIntervalTemplatePage", useModalNavigation: true));

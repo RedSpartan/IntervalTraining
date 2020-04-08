@@ -47,7 +47,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
         #endregion Properties
 
         #region Services
-        private IntervalTemplateEvent IntervalTemplateEvent { get; }
+        private CreateIntervalTemplateEvent IntervalTemplateEvent { get; }
         #endregion Services
 
         #region Commands
@@ -62,7 +62,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
         {
             Title = "Create New Interval";
 
-            IntervalTemplateEvent = eventAggregator?.GetEvent<IntervalTemplateEvent>()
+            IntervalTemplateEvent = eventAggregator?.GetEvent<CreateIntervalTemplateEvent>()
                 ?? throw new ArgumentNullException(nameof(eventAggregator));
 
             AddNewIntervalTemplateCommand = new DelegateCommand(async () => await AddNewIntervalTemplate());
@@ -84,7 +84,12 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
             return Task.Run(() =>
             {
                 IsBusy = true;
-                var interval = new Interval { Name = IntervalName, TimeSeconds = (int)IntervalTimeSeconds };
+                var interval = new Interval 
+                { 
+                    Name = IntervalName, 
+                    TimeSeconds = (int)IntervalTimeSeconds,
+                    Order = Template.Intervals.Count
+                };
                 
                 Device.BeginInvokeOnMainThread(() => Template.Intervals.Add(interval));
                 
