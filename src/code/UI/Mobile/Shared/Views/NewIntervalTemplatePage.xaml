@@ -52,7 +52,11 @@
             <Button Text="Add Interval"
                     Command="{Binding AddNewIntervalCommand}"
                     Grid.Row="6"
-                    Grid.ColumnSpan="2"/>
+                    Grid.Column="0"/>
+            
+            <Label Text="{Binding TotalIntervals}"
+                   Grid.Row="6"
+                   Grid.Column="1"/>
 
             <ListView ItemsSource="{Binding Intervals}"
                       Grid.Row="7"
