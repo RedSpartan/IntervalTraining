@@ -2,10 +2,14 @@
 <prism:PrismApplication xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.DryIoc;assembly=Prism.DryIoc.Forms"
+             xmlns:ioc="clr-namespace:Prism.Ioc;assembly=Prism.Forms"
+             xmlns:converter="clr-namespace:RedSpartan.IntervalTraining.UI.Mobile.Shared.Converter"
              x:Class="RedSpartan.IntervalTraining.UI.Mobile.Shared.App">
 	<Application.Resources>
 
 		<!-- Application resource dictionary -->
 
+        <ioc:ContainerProvider x:TypeArguments="converter:BooleanInverterConverter"
+                               x:Key="Inverter" />
 	</Application.Resources>
 </prism:PrismApplication>

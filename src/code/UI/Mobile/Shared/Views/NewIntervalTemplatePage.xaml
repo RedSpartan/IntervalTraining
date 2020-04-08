@@ -18,18 +18,18 @@
                 <RowDefinition Height="30*"/>
                 <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
-            
-            <Entry Text="{Binding Name}"
+
+            <Entry Text="{Binding Template.Name}"
                    Placeholder="Name"
                    Grid.Row="0"
                    Grid.ColumnSpan="2"/>
 
-            <Entry Text="{Binding TimeSeconds}"
+            <Entry Text="{Binding Template.TimeSeconds}"
                    Placeholder="Time Seconds"
                    Grid.Row="1"
                    Grid.ColumnSpan="2"/>
 
-            <Entry Text="{Binding Iterations}"
+            <Entry Text="{Binding Template.Iterations}"
                    Placeholder="No. Iterations"
                    Grid.Row="2"
                    Grid.ColumnSpan="2"/>
@@ -51,14 +51,15 @@
 
             <Button Text="Add Interval"
                     Command="{Binding AddNewIntervalCommand}"
+                    IsEnabled="{Binding IsBusy, Converter={StaticResource Inverter}}"
                     Grid.Row="6"
                     Grid.Column="0"/>
-            
-            <Label Text="{Binding TotalIntervals}"
+
+            <Label Text="{Binding Template.TotalIntervals}"
                    Grid.Row="6"
                    Grid.Column="1"/>
 
-            <ListView ItemsSource="{Binding Intervals}"
+            <ListView ItemsSource="{Binding Template.Intervals}"
                       Grid.Row="7"
                       Grid.ColumnSpan="2">
                 <ListView.ItemTemplate>
@@ -70,11 +71,13 @@
 
             <Button Text="Cancel"
                     Command="{Binding CancelCommand}"
+                    IsEnabled="{Binding IsBusy, Converter={StaticResource Inverter}}"
                     Grid.Row="8"
                     Grid.Column="0" />
 
             <Button Text="Save"
                     Command="{Binding AddNewIntervalTemplateCommand}"
+                    IsEnabled="{Binding IsBusy, Converter={StaticResource Inverter}}"
                     Grid.Row="8"
                     Grid.Column="1" />
         </Grid>

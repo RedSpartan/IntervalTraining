@@ -7,36 +7,24 @@ using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
 {
     public class NewIntervalTemplateViewModel : ViewModelBase
     {
         #region Fields
-        private string _name;
-        private int? _timeSeconds;
-        private int? _iterations;
         private string _intervalName;
         private int? _intervalTimeSeconds;
+        private IntervalTemplate _template = new IntervalTemplate();
+        private bool _isBusy;
         #endregion Fields
 
         #region Properties
-        public string Name
+        public IntervalTemplate Template
         {
-            get => _name;
-            set => SetProperty(ref _name, value);
-        }
-
-        public int? TimeSeconds
-        {
-            get => _timeSeconds;
-            set => SetProperty(ref _timeSeconds, value, () => { if (value != null) Iterations = null; });
-        }
-
-        public int? Iterations
-        {
-            get => _iterations;
-            set => SetProperty(ref _iterations, value, () => { if (value != null) TimeSeconds = null; });
+            get => _template;
+            set => SetProperty(ref _template, value);
         }
 
         public string IntervalName
@@ -50,11 +38,13 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
             get => _intervalTimeSeconds;
             set => SetProperty(ref _intervalTimeSeconds, value);
         }
-        #endregion Properties
 
-        #region Collections
-        public ObservableCollection<Interval> Intervals { get; set; } = new ObservableCollection<Interval>();
-        #endregion Collections
+        public bool IsBusy
+        {
+            get => _isBusy;
+            set => SetProperty(ref _isBusy, value);
+        }
+        #endregion Properties
 
         #region Services
         private IntervalTemplateEvent IntervalTemplateEvent { get; }
@@ -76,30 +66,32 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
                 ?? throw new ArgumentNullException(nameof(eventAggregator));
 
             AddNewIntervalTemplateCommand = new DelegateCommand(async () => await AddNewIntervalTemplate());
-            AddNewIntervalCommand = new DelegateCommand(AddNewInterval);
+            AddNewIntervalCommand = new DelegateCommand(async () => await AddNewInterval());
             CancelCommand = new DelegateCommand(async () => await NavigationService.GoBackAsync());
         }
 
         #region Methods
         private async Task AddNewIntervalTemplate()
         {
-            var model = new IntervalTemplate
-            {
-                Name = Name,
-                TimeSeconds = TimeSeconds,
-                Iterations = Iterations,
-                Intervals = Intervals
-            };
-
-            IntervalTemplateEvent.Publish(model);
+            IsBusy = true;
+            IntervalTemplateEvent.Publish(Template);
             await NavigationService.GoBackAsync();
+            IsBusy = false;
         }
 
-        private void AddNewInterval()
+        private Task AddNewInterval()
         {
-            Intervals.Add(new Interval { Name = IntervalName, TimeSeconds = (int)IntervalTimeSeconds });
-            IntervalName = null;
-            IntervalTimeSeconds = null;
+            return Task.Run(() =>
+            {
+                IsBusy = true;
+                var interval = new Interval { Name = IntervalName, TimeSeconds = (int)IntervalTimeSeconds };
+                
+                Device.BeginInvokeOnMainThread(() => Template.Intervals.Add(interval));
+                
+                IntervalName = null;
+                IntervalTimeSeconds = null;
+                IsBusy = false;
+            });
         }
         #endregion Methods
     }
