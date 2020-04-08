@@ -8,8 +8,8 @@ namespace RedSpartan.IntervalTraining.Repository.DTOs
         public string Name { get; set; }
         public int? TimeSeconds { get; set; }
         public int? Iterations { get; set; }
-        public List<IntervalDto> Intervals { get; set; } = new List<IntervalDto>();
+        public IList<IntervalDto> Intervals { get; set; } = new List<IntervalDto>();
 
-        public List<HistoryDto> History { get; set; } = new List<HistoryDto>();
+        public IList<HistoryDto> History { get; set; } = new List<HistoryDto>();
     }
 }

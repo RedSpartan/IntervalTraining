@@ -1,6 +1,8 @@
 ﻿using Prism.Commands;
+using Prism.Events;
 using Prism.Navigation;
-using RedSpartan.IntervalTraining.Repository.DTOs;
+using RedSpartan.IntervalTraining.UI.Mobile.Shared.Events;
+using RedSpartan.IntervalTraining.UI.Mobile.Shared.Models;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -15,7 +17,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
         private int? _timeSeconds;
         private int? _iterations;
         private string _intervalName;
-        private int _intervalTimeSeconds;
+        private int? _intervalTimeSeconds;
         #endregion Fields
 
         #region Properties
@@ -43,7 +45,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
             set => SetProperty(ref _intervalName, value);
         }
 
-        public int IntervalTimeSeconds
+        public int? IntervalTimeSeconds
         {
             get => _intervalTimeSeconds;
             set => SetProperty(ref _intervalTimeSeconds, value);
@@ -51,27 +53,53 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
         #endregion Properties
 
         #region Collections
-        public ObservableCollection<IntervalDto> Intervals { get; set; } = new ObservableCollection<IntervalDto>();
+        public ObservableCollection<Interval> Intervals { get; set; } = new ObservableCollection<Interval>();
         #endregion Collections
 
         #region Services
-        
+        private IntervalTemplateEvent IntervalTemplateEvent { get; }
         #endregion Services
 
         #region Commands
         public ICommand AddNewIntervalTemplateCommand { get; }
+        public ICommand AddNewIntervalCommand { get; }
+        public ICommand CancelCommand { get; }
         #endregion Commands
 
-        public NewIntervalTemplateViewModel(INavigationService navigationService) : base(navigationService)
+        public NewIntervalTemplateViewModel(INavigationService navigationService,
+            IEventAggregator eventAggregator)
+            : base(navigationService)
         {
             Title = "Create New Interval";
+
+            IntervalTemplateEvent = eventAggregator?.GetEvent<IntervalTemplateEvent>()
+                ?? throw new ArgumentNullException(nameof(eventAggregator));
+
             AddNewIntervalTemplateCommand = new DelegateCommand(async () => await AddNewIntervalTemplate());
+            AddNewIntervalCommand = new DelegateCommand(AddNewInterval);
+            CancelCommand = new DelegateCommand(async () => await NavigationService.GoBackAsync());
         }
 
         #region Methods
         private async Task AddNewIntervalTemplate()
         {
+            var model = new IntervalTemplate
+            {
+                Name = Name,
+                TimeSeconds = TimeSeconds,
+                Iterations = Iterations,
+                Intervals = Intervals
+            };
 
+            IntervalTemplateEvent.Publish(model);
+            await NavigationService.GoBackAsync();
+        }
+
+        private void AddNewInterval()
+        {
+            Intervals.Add(new Interval { Name = IntervalName, TimeSeconds = (int)IntervalTimeSeconds });
+            IntervalName = null;
+            IntervalTimeSeconds = null;
         }
         #endregion Methods
     }

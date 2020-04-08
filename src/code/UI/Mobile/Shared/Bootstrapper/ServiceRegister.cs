@@ -2,8 +2,8 @@
 using Prism.Ioc;
 using RedSpartan.IntervalTraining.Common.Interfaces;
 using RedSpartan.IntervalTraining.Repository.Access;
+using RedSpartan.IntervalTraining.Repository.Configuration;
 using RedSpartan.IntervalTraining.Repository.DTOs;
-using RedSpartan.IntervalTraining.Repository.MappingProfiles;
 using RedSpartan.IntervalTraining.Repository.Services;
 using Xamarin.Forms;
 
@@ -19,7 +19,11 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.Bootstrapper
             containerRegistry.Register<IContextFactory, ContextFactory>();
 
             containerRegistry.RegisterInstance(DependencyService.Get<IDeviceSpecifics>());
-            containerRegistry.RegisterInstance<IMapper>(new Mapper(AuroMapperConfiguration.MapperConfiguration()));
+            containerRegistry.RegisterInstance<IMapper>(new Mapper(new MapperConfiguration(cfg => 
+            {
+                cfg.AddProfile<AutoMapperModelProfile>();
+                cfg.AddProfile<AutoMapperRepoProfile>();
+            })));
 
             return containerRegistry;
         }

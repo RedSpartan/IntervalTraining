@@ -6,10 +6,73 @@
              mc:Ignorable="d"
              x:Class="RedSpartan.IntervalTraining.UI.Mobile.Shared.Views.NewIntervalTemplatePage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to New Interval Template!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30*"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            
+            <Entry Text="{Binding Name}"
+                   Placeholder="Name"
+                   Grid.Row="0"
+                   Grid.ColumnSpan="2"/>
+
+            <Entry Text="{Binding TimeSeconds}"
+                   Placeholder="Time Seconds"
+                   Grid.Row="1"
+                   Grid.ColumnSpan="2"/>
+
+            <Entry Text="{Binding Iterations}"
+                   Placeholder="No. Iterations"
+                   Grid.Row="2"
+                   Grid.ColumnSpan="2"/>
+
+            <BoxView HeightRequest="2"
+                     Color="Black"
+                     Grid.Row="3"
+                     Grid.ColumnSpan="2"/>
+
+            <Entry Text="{Binding IntervalName}"
+                   Placeholder="Interval Name"
+                   Grid.Row="4"
+                   Grid.ColumnSpan="2"/>
+
+            <Entry Text="{Binding IntervalTimeSeconds}"
+                   Placeholder="Interval Time Seconds"
+                   Grid.Row="5"
+                   Grid.ColumnSpan="2"/>
+
+            <Button Text="Add Interval"
+                    Command="{Binding AddNewIntervalCommand}"
+                    Grid.Row="6"
+                    Grid.ColumnSpan="2"/>
+
+            <ListView ItemsSource="{Binding Intervals}"
+                      Grid.Row="7"
+                      Grid.ColumnSpan="2">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding Name}" Detail="{Binding TimeSeconds}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Button Text="Cancel"
+                    Command="{Binding CancelCommand}"
+                    Grid.Row="8"
+                    Grid.Column="0" />
+
+            <Button Text="Save"
+                    Command="{Binding AddNewIntervalTemplateCommand}"
+                    Grid.Row="8"
+                    Grid.Column="1" />
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

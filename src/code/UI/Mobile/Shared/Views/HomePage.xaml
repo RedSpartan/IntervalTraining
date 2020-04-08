@@ -18,10 +18,18 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
+            
             <Image Source="lambda.png"
                    Grid.Row="0"/>
-            <Label Text="Home list to go here"
-                   Grid.Row="1" />
+            
+            <ListView ItemsSource="{Binding IntervalTemplates}"
+                      Grid.Row="1">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding Name}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
