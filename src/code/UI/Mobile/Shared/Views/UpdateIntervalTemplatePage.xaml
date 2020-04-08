@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="RedSpartan.IntervalTraining.UI.Mobile.Shared.Views.UpdateIntervalTemplatePage">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30*"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+
+            <Label Text="{Binding Template.Name}"
+                   Grid.Row="0"
+                   Grid.ColumnSpan="2"/>
+
+            <Entry Text="{Binding Template.TimeSeconds}"
+                   Placeholder="Time Seconds"
+                   Grid.Row="1"
+                   Grid.ColumnSpan="2"/>
+
+            <Entry Text="{Binding Template.Iterations}"
+                   Placeholder="No. Iterations"
+                   Grid.Row="2"
+                   Grid.ColumnSpan="2"/>
+
+            <BoxView HeightRequest="2"
+                     Color="Black"
+                     Grid.Row="3"
+                     Grid.ColumnSpan="2"/>
+
+            <Entry Text="{Binding IntervalName}"
+                   Placeholder="Interval Name"
+                   Grid.Row="4"
+                   Grid.ColumnSpan="2"/>
+
+            <Entry Text="{Binding IntervalTimeSeconds}"
+                   Placeholder="Interval Time Seconds"
+                   Grid.Row="5"
+                   Grid.ColumnSpan="2"/>
+
+            <Button Text="Add Interval"
+                    Command="{Binding AddNewIntervalCommand}"
+                    IsEnabled="{Binding IsBusy, Converter={StaticResource Inverter}}"
+                    Grid.Row="6"
+                    Grid.Column="0"/>
+
+            <Label Text="{Binding Template.TotalIntervals}"
+                   Grid.Row="6"
+                   Grid.Column="1"/>
+
+            <ListView ItemsSource="{Binding Template.Intervals}"
+                      Grid.Row="7"
+                      Grid.ColumnSpan="2">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding Name}" Detail="{Binding TimeSeconds}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Button Text="Cancel"
+                    Command="{Binding CancelCommand}"
+                    IsEnabled="{Binding IsBusy, Converter={StaticResource Inverter}}"
+                    Grid.Row="8"
+                    Grid.Column="0" />
+
+            <Button Text="Save"
+                    Command="{Binding AddNewIntervalTemplateCommand}"
+                    IsEnabled="{Binding IsBusy, Converter={StaticResource Inverter}}"
+                    Grid.Row="8"
+                    Grid.Column="1" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="RedSpartan.IntervalTraining.UI.Mobile.Shared.Views.TimerPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="00:00" />
+            <Grid>
+                <Button Text="Start"
+                        Grid.Column="0"/>
+                <Button Text="Stop"
+                        Grid.Column="1" />
+            </Grid>
+            <ListView ItemsSource="{Binding Intervals}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding Name}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
