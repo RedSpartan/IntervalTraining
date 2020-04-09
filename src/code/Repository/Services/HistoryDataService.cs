@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using RedSpartan.IntervalTraining.Repository.Access;
-using RedSpartan.IntervalTraining.Repository.Data.Entities;
+using RedSpartan.IntervalTraining.Internal.Repository.Access;
 using RedSpartan.IntervalTraining.Repository.DTOs;
+using RedSpartan.IntervalTraining.Repository.Internal.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

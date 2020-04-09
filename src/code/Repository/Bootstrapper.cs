@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using RedSpartan.IntervalTraining.Internal.Repository.Access;
 using System.Threading.Tasks;
 
 namespace RedSpartan.IntervalTraining.Repository

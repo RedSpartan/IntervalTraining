@@ -2,17 +2,14 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using RedSpartan.IntervalTraining.Repository;
+using RedSpartan.IntervalTraining.Internal.Repository.Access;
 
-namespace RedSpartan.IntervalTraining.Repository.Data.Migrations
+namespace RedSpartan.IntervalTraining.Repository.Internal.Data.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20200404145919_Initial")]
-    partial class Initial
+    partial class DatabaseContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

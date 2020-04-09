@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace RedSpartan.IntervalTraining.Repository.Data.Migrations
+namespace RedSpartan.IntervalTraining.Repository.Internal.Data.Migrations
 {
     public partial class Initial : Migration
     {

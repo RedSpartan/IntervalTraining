@@ -1,4 +1,4 @@
-﻿namespace RedSpartan.IntervalTraining.Repository.Access
+﻿namespace RedSpartan.IntervalTraining.Internal.Repository.Access
 {
     public interface IContextFactory
     {

@@ -1,6 +1,6 @@
 ﻿using RedSpartan.IntervalTraining.Common.Interfaces;
 
-namespace RedSpartan.IntervalTraining.Repository.Access
+namespace RedSpartan.IntervalTraining.Internal.Repository.Access
 {
     public class ContextFactory : IContextFactory
     {

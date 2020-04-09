@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace RedSpartan.IntervalTraining.Repository.Data.Entities
+namespace RedSpartan.IntervalTraining.Repository.Internal.Data.Entities
 {
     public class IntervalTemplate
     {

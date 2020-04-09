@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RedSpartan.IntervalTraining.Repository.Data.Entities;
+using RedSpartan.IntervalTraining.Repository.Internal.Data.Entities;
 
-namespace RedSpartan.IntervalTraining.Repository
+namespace RedSpartan.IntervalTraining.Internal.Repository.Access
 {
     public class DatabaseContext : DbContext
     {

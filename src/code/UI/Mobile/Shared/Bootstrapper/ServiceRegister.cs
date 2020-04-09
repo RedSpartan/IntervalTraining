@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Prism.Ioc;
 using RedSpartan.IntervalTraining.Common.Interfaces;
-using RedSpartan.IntervalTraining.Repository.Access;
+using RedSpartan.IntervalTraining.Internal.Repository.Access;
 using RedSpartan.IntervalTraining.Repository.Configuration;
 using RedSpartan.IntervalTraining.Repository.DTOs;
 using RedSpartan.IntervalTraining.Repository.Services;
