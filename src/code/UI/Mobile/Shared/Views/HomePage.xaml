@@ -24,9 +24,15 @@
             
             <ListView ItemsSource="{Binding IntervalTemplates}"
                       Grid.Row="1">
+                <ListView.Behaviors>
+                    <prism:EventToCommandBehavior EventName="ItemTapped"
+                                                  Command="{Binding OpenTimerCommand}"
+                                                  EventArgsParameterPath="Item" />
+                </ListView.Behaviors>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextCell Text="{Binding Name}"
+                                  
                                   Detail="{Binding TotalIntervals}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>

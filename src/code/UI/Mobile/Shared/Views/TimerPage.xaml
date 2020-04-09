@@ -7,12 +7,14 @@
              x:Class="RedSpartan.IntervalTraining.UI.Mobile.Shared.Views.TimerPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="00:00" />
+            <Label Text="{Binding TimeRemaining}" />
             <Grid>
                 <Button Text="Start"
-                        Grid.Column="0"/>
+                        Grid.Column="0"
+                        Command="{Binding StartCommand}" />
                 <Button Text="Stop"
-                        Grid.Column="1" />
+                        Grid.Column="1"
+                        Command="{Binding StopCommand}" />
             </Grid>
             <ListView ItemsSource="{Binding Intervals}">
                 <ListView.ItemTemplate>

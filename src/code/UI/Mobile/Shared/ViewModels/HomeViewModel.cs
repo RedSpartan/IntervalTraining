@@ -15,10 +15,6 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
 {
     public class HomeViewModel : ViewModelBase, IInitializeAsync
     {
-        #region Commands
-        public ICommand AddNewIntervalTemplateCommand { get; }
-        #endregion Commands
-
         #region Collections
         public ObservableCollection<IntervalTemplate> IntervalTemplates { get; } = new ObservableCollection<IntervalTemplate>();
         #endregion Collections
@@ -29,6 +25,12 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
         private IMapper Mapper { get; }
         #endregion Services
 
+        #region Commands
+        public ICommand AddNewIntervalTemplateCommand { get; }
+        public ICommand OpenTimerCommand { get; }
+        #endregion Commands
+
+        #region Constructor
         public HomeViewModel(INavigationService navigationService,
             IDataService<IntervalTemplateDto> intervalService,
             IEventAggregator eventAggregator,
@@ -42,17 +44,29 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
             EventAggregator = eventAggregator ?? throw new ArgumentNullException(nameof(eventAggregator));
 
             AddNewIntervalTemplateCommand = new DelegateCommand(async () => await NavigationService.NavigateAsync("NewIntervalTemplatePage", useModalNavigation: true));
+            OpenTimerCommand = new DelegateCommand<IntervalTemplate>(async (item) => await OpenTimer(item));
 
             EventAggregator.GetEvent<CreateIntervalTemplateEvent>().Subscribe(async (item) => await OnNewIntervalTemplate(item));
             EventAggregator.GetEvent<UpdateIntervalTemplateEvent>().Subscribe(async (item) => await OnUpdateIntervalTemplate(item));
         }
+        #endregion Constructor
 
+        #region Methods
         public async Task InitializeAsync(INavigationParameters parameters)
         {
             foreach (var template in await IntervalService.GetItemsAsync())
             {
                 IntervalTemplates.Add(Mapper.Map<IntervalTemplate>(template));
             }
+        }
+
+        private async Task OpenTimer(IntervalTemplate item)
+        {
+            var nav = new NavigationParameters
+            {
+                { nameof(IntervalTemplate), item }
+            };
+            await NavigationService.NavigateAsync("TimerPage", nav, useModalNavigation: true);
         }
 
         private async Task OnNewIntervalTemplate(IntervalTemplate item)
@@ -72,5 +86,6 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
             EventAggregator.GetEvent<UpdateIntervalTemplateEvent>().Unsubscribe(async (item) => await OnUpdateIntervalTemplate(item));
             base.Destroy();
         }
+        #endregion Methods
     }
 }
