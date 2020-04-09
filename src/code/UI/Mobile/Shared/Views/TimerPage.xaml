@@ -16,13 +16,16 @@
                         Grid.Column="1"
                         Command="{Binding StopCommand}" />
             </Grid>
-            <ListView ItemsSource="{Binding Intervals}">
+            <ListView ItemsSource="{Binding Queue}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextCell Text="{Binding Name}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <Button Text="Stop"
+                        Grid.Column="1"
+                        Command="{Binding CloseCommand}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
