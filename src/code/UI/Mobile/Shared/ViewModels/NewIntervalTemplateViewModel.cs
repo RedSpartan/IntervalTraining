@@ -87,7 +87,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
                 var interval = new Interval 
                 { 
                     Name = IntervalName, 
-                    TimeSeconds = (int)IntervalTimeSeconds,
+                    Time = TimeSpan.FromSeconds((int)IntervalTimeSeconds),
                     Order = Template.Intervals.Count
                 };
                 

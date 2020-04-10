@@ -1,4 +1,5 @@
 ﻿using Prism.Mvvm;
+using System;
 
 namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.Models
 {
@@ -7,13 +8,13 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.Models
         #region Fields
         private int _order;
         private string _name;
-        private int _timeSeconds;
+        private TimeSpan _time;
         #endregion Fields
 
         #region Properties
         public int Order { get => _order; set => SetProperty( ref _order, value); }
         public string Name { get => _name; set => SetProperty(ref _name, value); }
-        public int TimeSeconds { get => _timeSeconds; set => SetProperty(ref _timeSeconds, value); }
+        public TimeSpan Time { get => _time; set => SetProperty(ref _time, value); }
         #endregion Properties
     }
 }

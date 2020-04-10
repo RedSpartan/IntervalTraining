@@ -2,20 +2,27 @@
 using Prism.Events;
 using Prism.Navigation;
 using RedSpartan.IntervalTraining.Common;
+using RedSpartan.IntervalTraining.UI.Mobile.Shared.Events;
 using RedSpartan.IntervalTraining.UI.Mobile.Shared.Models;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
 {
-    public class TimerViewModel : ViewModelBase, IInitializeAsync
+    public class TimerViewModel : ViewModelBase
     {
         #region Fields
         private IntervalTemplate _intervalTemplate;
         private CountDownTimer _timer = new CountDownTimer();
         private string _timeRemaining = "00:00.000";
         private bool _started = false;
+        private bool _finished = false;
+        private readonly History _history = new History();
+        private readonly Stack<Interval> _compleatedIntervals = new Stack<Interval>();
         #endregion  Fields
 
         #region Properties
@@ -36,6 +43,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
             get => _timeRemaining;
             set => SetProperty(ref _timeRemaining, value);
         }
+
         #endregion Properties
 
         #region Collections
@@ -59,15 +67,14 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
             : base(navigationService)
         {
             EventAggregator = eventAggregator ?? throw new ArgumentNullException(nameof(eventAggregator));
-            StartCommand = new DelegateCommand(() => { _started = true; Timer.Start(); });
-            StopCommand = new DelegateCommand(() => { Timer.Pause(); _started = false; });
+            StartCommand = new DelegateCommand(Start);
+            StopCommand = new DelegateCommand(Stop);
             CloseCommand = new DelegateCommand(async () => await NavigationService.GoBackAsync());
         }
         #endregion Constructor
 
         #region Methods
-
-        public async Task InitializeAsync(INavigationParameters parameters)
+        public override void Initialize(INavigationParameters parameters)
         {
             if (parameters.ContainsKey(nameof(IntervalTemplate)))
             {
@@ -78,34 +85,64 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
             CreateQueue(IntervalTemplate);
 
             SetupTimer();
-            
-            Timer.TimeChanged += () => TimeRemaining = Timer.TimeLeftMsStr;
+
+            Timer.TimeChanged += () => TimeRemaining = Timer.TimeLeftStr;
 
             Timer.CountDownFinished += () => OnCountDownFinish();
 
             Timer.StepMs = 33;
+
+            _history.Template = IntervalTemplate;
+            _history.Intervals = IntervalTemplate.Intervals;
         }
 
         private void OnCountDownFinish()
         {
+            _history.TimeActiveSeconds += (int)Queue.Peek().Time.TotalSeconds;
+            _compleatedIntervals.Push(Queue.Peek());
+            
+            if(IntervalTemplate.Iterations == null && IntervalTemplate.TimeSeconds == null)
+            {
+                Queue.Enqueue(Queue.Peek());
+            }
+
             Queue.Dequeue();
 
-            if (Queue.Count > 0)
+            if (_finished || Queue.Count == 0)
             {
-                SetupTimer();
+                _started = false;
+                _finished = true;
+                _history.Stop = DateTime.UtcNow;
+                EventAggregator.GetEvent<CreateHistoryEvent>().Publish(_history);
             }
             else
             {
-                _started = false;
-                TimeRemaining = "Finished";
+                SetupTimer();
             }
+        }
+
+        private void Start()
+        {
+            if(_history.Start == DateTime.MinValue)
+            {
+                _history.Start = DateTime.UtcNow;
+            }
+            _started = true; 
+            Timer.Start();
+        }
+
+        private void Stop()
+        {
+            Timer.Pause();
+            _started = false;
         }
 
         private void SetupTimer()
         {
-            Timer.SetTime(0, Queue.Peek().TimeSeconds);
+            var timespan = Queue.Peek().Time;
+            Timer.SetTime(timespan.Minutes, timespan.Seconds);
 
-            TimeRemaining = Timer.TimeLeftMsStr;
+            TimeRemaining = Timer.TimeLeftStr;
             
             if (_started)
             {
@@ -127,12 +164,12 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
             }
             else if(template.TimeSeconds != null)
             {
-                int totalTime = 0;
+                double totalTime = 0;
                 while (totalTime < template.TimeSeconds)
                 {
                     foreach (var item in template.Intervals)
                     {
-                        totalTime += item.TimeSeconds;
+                        totalTime += item.Time.TotalSeconds;
                         Queue.Enqueue(item);
 
                         if(totalTime >= template.TimeSeconds)
