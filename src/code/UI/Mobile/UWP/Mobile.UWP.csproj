@@ -127,6 +127,9 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.10" />
+    <PackageReference Include="Syncfusion.Xamarin.SfListView">
+      <Version>18.1.0.42</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="4.5.0.530" />
     <PackageReference Include="Prism.DryIoc.Forms" Version="7.2.0.1422" />
   </ItemGroup>

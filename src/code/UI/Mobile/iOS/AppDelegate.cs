@@ -2,6 +2,8 @@
 using Prism;
 using Prism.Ioc;
 using RedSpartan.IntervalTraining.UI.Mobile.Shared;
+using Syncfusion.ListView.XForms.iOS;
+using Syncfusion.XForms.iOS.EffectsView;
 using UIKit;
 
 
@@ -23,6 +25,8 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+            SfListViewRenderer.Init();
+            SfEffectsViewRenderer.Init();
             LoadApplication(new App(new iOSInitializer()));
 
             return base.FinishedLaunching(app, options);
