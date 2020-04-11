@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="RedSpartan.IntervalTraining.UI.Mobile.Shared.Views.UpdateIntervalTemplatePage">
+             x:Class="RedSpartan.IntervalTraining.UI.Mobile.Shared.Views.IntervalTemplatePage">
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
@@ -19,7 +19,8 @@
                 <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
 
-            <Label Text="{Binding Template.Name}"
+            <Entry Text="{Binding Template.Name}"
+                   Placeholder="Name"
                    Grid.Row="0"
                    Grid.ColumnSpan="2"/>
 

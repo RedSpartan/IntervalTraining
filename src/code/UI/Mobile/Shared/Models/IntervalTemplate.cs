@@ -18,6 +18,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.Models
         public int? TimeSeconds { get => _timeSeconds; set => SetProperty(ref _timeSeconds, value); }
         public int? Iterations { get => _iterations; set => SetProperty(ref _iterations, value); }
 
+        public bool IsNew => Id == 0;
         public int TotalIntervals => Intervals.Count;
         #endregion Properties
 

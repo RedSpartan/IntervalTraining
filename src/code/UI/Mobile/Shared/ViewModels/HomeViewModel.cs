@@ -43,11 +43,10 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
 
             EventAggregator = eventAggregator ?? throw new ArgumentNullException(nameof(eventAggregator));
 
-            AddNewIntervalTemplateCommand = new DelegateCommand(async () => await NavigationService.NavigateAsync("NewIntervalTemplatePage", useModalNavigation: true));
+            AddNewIntervalTemplateCommand = new DelegateCommand(async () => await NavigationService.NavigateAsync("IntervalTemplatePage", useModalNavigation: true));
             OpenTimerCommand = new DelegateCommand<IntervalTemplate>(async (item) => await OpenTimer(item));
 
-            EventAggregator.GetEvent<CreateIntervalTemplateEvent>().Subscribe(async (item) => await OnNewIntervalTemplate(item));
-            EventAggregator.GetEvent<UpdateIntervalTemplateEvent>().Subscribe(async (item) => await OnUpdateIntervalTemplate(item));
+            EventAggregator.GetEvent<IntervalTemplateEvent>().Subscribe(async (item) => await OnIntervalTemplateChange(item));
         }
         #endregion Constructor
 
@@ -69,21 +68,22 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
             await NavigationService.NavigateAsync("TimerPage", nav, useModalNavigation: true);
         }
 
-        private async Task OnNewIntervalTemplate(IntervalTemplate item)
+        private async Task OnIntervalTemplateChange(IntervalTemplate item)
         {
-            await IntervalService.AddItemAsync(Mapper.Map<IntervalTemplateDto>(item));
-            IntervalTemplates.Insert(0, item);
-        }
-
-        private async Task OnUpdateIntervalTemplate(IntervalTemplate item)
-        {
-            await IntervalService.UpdateItemAsync(Mapper.Map<IntervalTemplateDto>(item));
+            if (item.IsNew)
+            {
+                await IntervalService.AddItemAsync(Mapper.Map<IntervalTemplateDto>(item));
+                IntervalTemplates.Insert(0, item);
+            }
+            else
+            {
+                await IntervalService.UpdateItemAsync(Mapper.Map<IntervalTemplateDto>(item));
+            }
         }
 
         public override void Destroy()
         {
-            EventAggregator.GetEvent<CreateIntervalTemplateEvent>().Unsubscribe(async (item) => await OnNewIntervalTemplate(item));
-            EventAggregator.GetEvent<UpdateIntervalTemplateEvent>().Unsubscribe(async (item) => await OnUpdateIntervalTemplate(item));
+            EventAggregator.GetEvent<IntervalTemplateEvent>().Unsubscribe(async (item) => await OnIntervalTemplateChange(item));
             base.Destroy();
         }
         #endregion Methods

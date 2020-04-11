@@ -6,6 +6,7 @@ namespace RedSpartan.IntervalTraining.Repository.DTOs
     public class HistoryDto
     {
         public int Id { get; set; }
+        public string Name { get; set; }
         public IntervalTemplateDto Template { get; set; }
         public List<IntervalDto> Intervals { get; set; } = new List<IntervalDto>();
         public int TimeActiveSeconds { get; set; }

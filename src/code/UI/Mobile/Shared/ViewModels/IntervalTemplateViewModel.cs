@@ -4,14 +4,13 @@ using Prism.Navigation;
 using RedSpartan.IntervalTraining.UI.Mobile.Shared.Events;
 using RedSpartan.IntervalTraining.UI.Mobile.Shared.Models;
 using System;
-using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
 {
-    public class UpdateIntervalTemplateViewModel : ViewModelBase
+    public class IntervalTemplateViewModel : ViewModelBase
     {
         #region Fields
         private string _intervalName;
@@ -47,7 +46,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
         #endregion Properties
 
         #region Services
-        private CreateIntervalTemplateEvent IntervalTemplateEvent { get; }
+        private IntervalTemplateEvent IntervalTemplateEvent { get; }
         #endregion Services
 
         #region Commands
@@ -56,13 +55,13 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
         public ICommand CancelCommand { get; }
         #endregion Commands
 
-        public UpdateIntervalTemplateViewModel(INavigationService navigationService,
+        public IntervalTemplateViewModel(INavigationService navigationService,
             IEventAggregator eventAggregator)
             : base(navigationService)
         {
             Title = "Create New Interval";
 
-            IntervalTemplateEvent = eventAggregator?.GetEvent<CreateIntervalTemplateEvent>()
+            IntervalTemplateEvent = eventAggregator?.GetEvent<IntervalTemplateEvent>()
                 ?? throw new ArgumentNullException(nameof(eventAggregator));
 
             AddNewIntervalTemplateCommand = new DelegateCommand(async () => await AddNewIntervalTemplate());

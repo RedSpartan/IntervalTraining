@@ -17,8 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\UpdateIntervalTemplatePage.xaml.cs">
-      <DependentUpon>UpdateIntervalTemplatePage.xaml</DependentUpon>
+    <Compile Update="Views\IntervalTemplatePage.xaml.cs">
+      <DependentUpon>IntervalTemplatePage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -32,7 +32,7 @@
     <EmbeddedResource Update="Views\MainPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\NewIntervalTemplatePage.xaml">
+    <EmbeddedResource Update="Views\IntervalTemplatePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\TimerPage.xaml">

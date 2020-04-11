@@ -32,7 +32,6 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextCell Text="{Binding Name}"
-                                  
                                   Detail="{Binding TotalIntervals}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>

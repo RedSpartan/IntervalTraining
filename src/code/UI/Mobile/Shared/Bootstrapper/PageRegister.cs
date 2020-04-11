@@ -21,9 +21,8 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.Bootstrapper
             containerRegistry.RegisterForNavigation<MainPage, MainViewModel>();
             containerRegistry.RegisterForNavigation<HomePage, HomeViewModel>();
             containerRegistry.RegisterForNavigation<HistoryPage, HistoryViewModel>();
-            containerRegistry.RegisterForNavigation<NewIntervalTemplatePage, NewIntervalTemplateViewModel>();
+            containerRegistry.RegisterForNavigation<IntervalTemplatePage, IntervalTemplateViewModel>();
             containerRegistry.RegisterForNavigation<TimerPage, TimerViewModel>();
-            containerRegistry.RegisterForNavigation<UpdateIntervalTemplatePage, UpdateIntervalTemplateViewModel>();
             return containerRegistry;
         }
     }
