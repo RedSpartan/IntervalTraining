@@ -5,10 +5,7 @@ using RedSpartan.IntervalTraining.Common;
 using RedSpartan.IntervalTraining.UI.Mobile.Shared.Events;
 using RedSpartan.IntervalTraining.UI.Mobile.Shared.Models;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
@@ -92,14 +89,14 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
 
             Timer.StepMs = 33;
 
-            _history.Template = IntervalTemplate;
-            _history.Intervals = IntervalTemplate.Intervals;
+            _history.TemplateId = IntervalTemplate.Id;
+            _history.Name = IntervalTemplate.Name;
         }
 
         private void OnCountDownFinish()
         {
             _history.TimeActiveSeconds += (int)Queue.Peek().Time.TotalSeconds;
-            _compleatedIntervals.Push(Queue.Peek());
+            _compleatedIntervals.Push(Queue.Peek().Clone());
             
             if(IntervalTemplate.Iterations == null && IntervalTemplate.TimeSeconds == null)
             {
@@ -113,6 +110,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
                 _started = false;
                 _finished = true;
                 _history.Stop = DateTime.UtcNow;
+                _history.Intervals = new List<Interval>(_compleatedIntervals);
                 EventAggregator.GetEvent<CreateHistoryEvent>().Publish(_history);
             }
             else

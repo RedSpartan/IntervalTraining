@@ -8,7 +8,7 @@ namespace RedSpartan.IntervalTraining.Repository
     {
         public static async Task InitialiseAsync(string dbPath)
         {
-            using (var context = new DatabaseContext(dbPath))
+            using (var context = new DataContext(dbPath))
             {
                 await context.Database.MigrateAsync();
             }

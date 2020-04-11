@@ -11,9 +11,9 @@ namespace RedSpartan.IntervalTraining.Internal.Repository.Access
             Path = device.DbPath;
         }
 
-        public DatabaseContext GetContext()
+        public DataContext GetContext()
         {
-            return new DatabaseContext(Path);
+            return new DataContext(Path);
         }
     }
 }

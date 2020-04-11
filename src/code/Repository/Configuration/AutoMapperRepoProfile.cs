@@ -18,7 +18,7 @@ namespace RedSpartan.IntervalTraining.Repository.Configuration
                 .ForMember(dst => dst.Intervals, opt => opt.MapFrom(src => JsonConvert.SerializeObject(src.Intervals)));
 
             CreateMap<History, HistoryDto>()
-                .ForMember(dst => dst.Intervals, opt => opt.MapFrom(src => JsonConvert.DeserializeObject<List<IntervalDto>>(src.Intervals).OrderByDescending(x => x.Order)));
+                .ForMember(dst => dst.Intervals, opt => opt.MapFrom(src => JsonConvert.DeserializeObject<List<IntervalDto>>(src.Intervals)));
 
             CreateMap<HistoryDto, History>()
                 .ForMember(dst => dst.Intervals, opt => opt.MapFrom(src => JsonConvert.SerializeObject(src.Intervals)));

@@ -2,6 +2,6 @@
 {
     public interface IContextFactory
     {
-        DatabaseContext GetContext();
+        DataContext GetContext();
     }
 }

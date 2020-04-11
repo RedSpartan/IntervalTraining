@@ -3,18 +3,18 @@ using RedSpartan.IntervalTraining.Repository.Internal.Data.Entities;
 
 namespace RedSpartan.IntervalTraining.Internal.Repository.Access
 {
-    public class DatabaseContext : DbContext
+    public class DataContext : DbContext
     {
         private readonly string _databasePath;
         public DbSet<IntervalTemplate> Intervals { get; set; }
         public DbSet<History> Histories { get; set; }
 
-        public DatabaseContext()
+        public DataContext()
         {
             //This is just for migration
         }
 
-        public DatabaseContext(string path)
+        public DataContext(string path)
         {
             _databasePath = path;
         }
@@ -28,7 +28,7 @@ namespace RedSpartan.IntervalTraining.Internal.Repository.Access
         {
             base.OnModelCreating(modelBuilder);
 
-            _ = modelBuilder.Entity<IntervalTemplate>(x =>
+            modelBuilder.Entity<IntervalTemplate>(x =>
               {
                   x.Property(p => p.Id).ValueGeneratedOnAdd();
 
@@ -41,7 +41,7 @@ namespace RedSpartan.IntervalTraining.Internal.Repository.Access
                       .HasForeignKey(p => p.TemplateId);
               });
 
-            _ = modelBuilder.Entity<History>(x =>
+            modelBuilder.Entity<History>(x =>
               {
                   x.Property(p => p.Id).ValueGeneratedOnAdd();
 

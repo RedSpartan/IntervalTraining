@@ -12,7 +12,7 @@
         <ListView ItemsSource="{Binding History}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding Start}"
+                    <TextCell Text="{Binding Name}"
                               Detail="{Binding TimeActiveSeconds}"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
