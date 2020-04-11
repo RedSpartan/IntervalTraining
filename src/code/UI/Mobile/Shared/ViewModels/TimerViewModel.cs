@@ -55,7 +55,6 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
         public ICommand StartCommand { get; }
         public ICommand StopCommand { get; }
         public ICommand CloseCommand { get; }
-        
         #endregion Commands
 
         #region Constructor

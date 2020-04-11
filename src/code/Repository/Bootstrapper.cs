@@ -10,6 +10,7 @@ namespace RedSpartan.IntervalTraining.Repository
         {
             using (var context = new DataContext(dbPath))
             {
+                //await context.Database.EnsureDeletedAsync();
                 await context.Database.MigrateAsync();
             }
         }
