@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="licence.usr" />
+    <EmbeddedResource Include="Resources\licence.usr" />
   </ItemGroup>
 
   <ItemGroup>

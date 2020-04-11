@@ -7,7 +7,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.Resources
     {
         public async static Task<string> GetAsync(string name)
         {
-            var json = await Reader.GetTextFileAsync("RedSpartan.IntervalTraining.UI.Mobile.Shared.licence.usr");
+            var json = await Reader.GetTextFileAsync("RedSpartan.IntervalTraining.UI.Mobile.Shared.Resources.licence.usr");
             var obj = JObject.Parse(json);
 
             return obj.Value<string>(name);
