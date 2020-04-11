@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="licence.usr" />
+    <EmbeddedResource Include="licence.usr" />
   </ItemGroup>
 
   <ItemGroup>
@@ -47,6 +47,10 @@
     <EmbeddedResource Update="Views\TimerPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
 
 </Project>

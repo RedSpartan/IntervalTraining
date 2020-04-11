@@ -6,6 +6,7 @@
              mc:Ignorable="d"
              x:Class="RedSpartan.IntervalTraining.UI.Mobile.Shared.Views.HomePage"
              xmlns:prism="http://prismlibrary.com"
+             xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              prism:ViewModelLocator.AutowireViewModel="True"
              Title="{Binding Title}">
 
@@ -21,8 +22,24 @@
             
             <Image Source="lambda.png"
                    Grid.Row="0"/>
-            
-            <ListView ItemsSource="{Binding IntervalTemplates}"
+            <syncfusion:SfListView ItemsSource="{Binding IntervalTemplates}"
+                                   ItemSize="100"
+                                   Grid.Row="1">
+
+                <syncfusion:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.4*" />
+                                <RowDefinition Height="0.6*" />
+                            </Grid.RowDefinitions>
+                            <Label Text="{Binding Name}" FontAttributes="Bold" TextColor="Teal" FontSize="21" />
+                            <Label Grid.Row="1" Text="{Binding TotalIntervals}" TextColor="Teal" FontSize="15"/>
+                        </Grid>
+                    </DataTemplate>
+                </syncfusion:SfListView.ItemTemplate>
+            </syncfusion:SfListView>
+            <!--<ListView ItemsSource="{Binding IntervalTemplates}"
                       Grid.Row="1">
                 <ListView.Behaviors>
                     <prism:EventToCommandBehavior EventName="ItemTapped"
@@ -35,7 +52,7 @@
                                   Detail="{Binding TotalIntervals}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-            </ListView>
+            </ListView>-->
         </Grid>
     </ContentPage.Content>
 </ContentPage>
