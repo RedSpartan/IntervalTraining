@@ -26,7 +26,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
         #endregion Services
 
         #region Commands
-        public ICommand AddNewIntervalTemplateCommand { get; }
+        public ICommand AddEditIntervalTemplateCommand { get; }
         public ICommand OpenTimerCommand { get; }
         #endregion Commands
 
@@ -43,7 +43,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
 
             EventAggregator = eventAggregator ?? throw new ArgumentNullException(nameof(eventAggregator));
 
-            AddNewIntervalTemplateCommand = new DelegateCommand(async () => await NavigationService.NavigateAsync("IntervalTemplatePage", useModalNavigation: true));
+            AddEditIntervalTemplateCommand = new DelegateCommand(async () => await NavigationService.NavigateAsync("IntervalTemplatePage", useModalNavigation: true));
             OpenTimerCommand = new DelegateCommand<IntervalTemplate>(async (item) => await OpenTimer(item));
 
             EventAggregator.GetEvent<IntervalTemplateEvent>().Subscribe(async (item) => await OnIntervalTemplateChange(item));
