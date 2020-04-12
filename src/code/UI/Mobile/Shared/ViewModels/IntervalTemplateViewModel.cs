@@ -15,7 +15,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
         #region Fields
         private string _intervalName;
         private int? _intervalTimeSeconds;
-        private IntervalTemplate _template = new IntervalTemplate();
+        private IntervalTemplate _template;
         private bool _isBusy;
         #endregion Fields
 
@@ -96,6 +96,17 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
                 IntervalTimeSeconds = null;
                 IsBusy = false;
             });
+        }
+
+        public override void Initialize(INavigationParameters parameters)
+        {
+            if (!parameters.ContainsKey(nameof(IntervalTemplate)))
+            {
+                throw new ArgumentNullException(nameof(IntervalTemplate));
+            }
+
+            Template = parameters.GetValue<IntervalTemplate>(nameof(IntervalTemplate));
+            base.Initialize(parameters);
         }
         #endregion Methods
     }

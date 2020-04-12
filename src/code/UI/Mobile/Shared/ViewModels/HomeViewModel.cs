@@ -43,10 +43,10 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
 
             EventAggregator = eventAggregator ?? throw new ArgumentNullException(nameof(eventAggregator));
 
-            AddEditIntervalTemplateCommand = new DelegateCommand(async () => await NavigationService.NavigateAsync("IntervalTemplatePage", useModalNavigation: true));
-            OpenTimerCommand = new DelegateCommand<IntervalTemplate>(async (item) => await OpenTimer(item));
+            AddEditIntervalTemplateCommand = new DelegateCommand<object>(async (item) => await AddEditTemplateAsync(item));
+            OpenTimerCommand = new DelegateCommand<IntervalTemplate>(async (item) => await OpenTimerAsync(item));
 
-            EventAggregator.GetEvent<IntervalTemplateEvent>().Subscribe(async (item) => await OnIntervalTemplateChange(item));
+            EventAggregator.GetEvent<IntervalTemplateEvent>().Subscribe(async (item) => await OnIntervalTemplateChangeAsync(item));
         }
         #endregion Constructor
 
@@ -59,7 +59,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
             }
         }
 
-        private async Task OpenTimer(IntervalTemplate item)
+        private async Task OpenTimerAsync(IntervalTemplate item)
         {
             var nav = new NavigationParameters
             {
@@ -68,7 +68,21 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
             await NavigationService.NavigateAsync("TimerPage", nav, useModalNavigation: true);
         }
 
-        private async Task OnIntervalTemplateChange(IntervalTemplate item)
+        private async Task AddEditTemplateAsync(object obj)
+        {
+            var nav = new NavigationParameters();
+            if(obj is IntervalTemplate item)
+            {
+                nav.Add(nameof(IntervalTemplate), item); 
+            }
+            else
+            {
+                nav.Add(nameof(IntervalTemplate), new IntervalTemplate());
+            }
+            await NavigationService.NavigateAsync("IntervalTemplatePage", nav, useModalNavigation: true);
+        }
+
+        private async Task OnIntervalTemplateChangeAsync(IntervalTemplate item)
         {
             if (item.IsNew)
             {
@@ -83,7 +97,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
 
         public override void Destroy()
         {
-            EventAggregator.GetEvent<IntervalTemplateEvent>().Unsubscribe(async (item) => await OnIntervalTemplateChange(item));
+            EventAggregator.GetEvent<IntervalTemplateEvent>().Unsubscribe(async (item) => await OnIntervalTemplateChangeAsync(item));
             base.Destroy();
         }
         #endregion Methods
