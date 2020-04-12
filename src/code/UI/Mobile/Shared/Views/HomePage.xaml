@@ -21,11 +21,17 @@
             </Grid.RowDefinitions>
             
             <Image Source="lambda.png"
-                   Grid.Row="0"/>
+                   Grid.Row="0" />
+            
             <syncfusion:SfListView ItemsSource="{Binding IntervalTemplates}"
                                    ItemSize="100"
                                    Grid.Row="1">
 
+                <syncfusion:SfListView.Behaviors>
+                    <prism:EventToCommandBehavior EventName="ItemTapped"
+                                                  Command="{Binding OpenTimerCommand}"
+                                                  EventArgsParameterPath="ItemData" />
+                </syncfusion:SfListView.Behaviors>
                 <syncfusion:SfListView.ItemTemplate>
                     <DataTemplate>
                         <Grid Padding="10">
