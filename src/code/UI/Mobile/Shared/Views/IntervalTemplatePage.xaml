@@ -4,6 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              x:Class="RedSpartan.IntervalTraining.UI.Mobile.Shared.Views.IntervalTemplatePage">
     <ContentPage.Content>
         <Grid>
@@ -65,15 +66,23 @@
                    Grid.Row="6"
                    Grid.Column="1"/>
 
-            <ListView ItemsSource="{Binding Template.Intervals}"
-                      Grid.Row="7"
-                      Grid.ColumnSpan="2">
-                <ListView.ItemTemplate>
+            <syncfusion:SfListView ItemsSource="{Binding Template.Intervals}"
+                               ItemSize="100"
+                               Grid.Row="7"
+                               Grid.ColumnSpan="2">
+                <syncfusion:SfListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell Text="{Binding Name}" Detail="{Binding TimeSeconds}" />
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.4*" />
+                                <RowDefinition Height="0.6*" />
+                            </Grid.RowDefinitions>
+                            <Label Text="{Binding Name}" FontAttributes="Bold" TextColor="Teal" FontSize="21" />
+                            <Label Grid.Row="1" Text="{Binding TimeSeconds}" TextColor="Teal" FontSize="15"/>
+                        </Grid>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                </syncfusion:SfListView.ItemTemplate>
+            </syncfusion:SfListView>
 
             <Button Text="Cancel"
                     Command="{Binding CancelCommand}"
