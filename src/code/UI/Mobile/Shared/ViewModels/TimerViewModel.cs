@@ -7,6 +7,7 @@ using RedSpartan.IntervalTraining.UI.Mobile.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
 {
@@ -102,7 +103,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
                 Queue.Enqueue(Queue.Peek());
             }
 
-            Queue.Dequeue();
+            Device.BeginInvokeOnMainThread(() => Queue.Dequeue());
 
             if (_finished || Queue.Count == 0)
             {

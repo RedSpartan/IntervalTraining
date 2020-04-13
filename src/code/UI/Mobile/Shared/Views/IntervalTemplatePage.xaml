@@ -67,9 +67,9 @@
                    Grid.Column="1"/>
 
             <syncfusion:SfListView ItemsSource="{Binding Template.Intervals}"
-                               ItemSize="100"
-                               Grid.Row="7"
-                               Grid.ColumnSpan="2">
+                                   ItemSize="100"
+                                   Grid.Row="7"
+                                   Grid.ColumnSpan="2">
                 <syncfusion:SfListView.ItemTemplate>
                     <DataTemplate>
                         <Grid Padding="10">
