@@ -11,6 +11,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
 {
@@ -89,11 +90,18 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
 
         private async Task DeleteTemplateAsync(object obj)
         {
-            if (obj is IntervalTemplate item
-                && await DialogService.DisplayAlertAsync("Delete", $"You are about to delete template '{item.Name}', are you sure?", "Ok", "Cancel")
-                && await IntervalService.DeleteItemAsync(item.Id))
+            if (obj is IntervalTemplate item)
             {
-                IntervalTemplates.Remove(item);
+                if (Device.RuntimePlatform != Device.UWP
+                    && !(await DialogService.DisplayAlertAsync("Delete", $"You are about to delete template '{item.Name}', are you sure?", "Ok", "Cancel")))
+                {
+                    return;
+                }
+
+                if (await IntervalService.DeleteItemAsync(item.Id))
+                {
+                    IntervalTemplates.Remove(item);
+                }
             }
         }
 
@@ -101,7 +109,8 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
         {
             if (item.IsNew)
             {
-                await IntervalService.AddItemAsync(Mapper.Map<IntervalTemplateDto>(item));
+                var id = await IntervalService.AddItemAsync(Mapper.Map<IntervalTemplateDto>(item));
+                item.Id = id;
                 IntervalTemplates.Insert(0, item);
             }
             else

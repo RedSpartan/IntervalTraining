@@ -21,15 +21,16 @@ namespace RedSpartan.IntervalTraining.Repository.Services
             _contextFactory = contextFactory ?? throw new ArgumentNullException(nameof(contextFactory));
         }
 
-        public async Task<bool> AddItemAsync(IntervalTemplateDto item)
+        public async Task<int> AddItemAsync(IntervalTemplateDto item)
         {
             using (var context = _contextFactory.GetContext())
             {
-                context.Intervals.Add(_mapper.Map<IntervalTemplate>(item));
+                var entity = _mapper.Map<IntervalTemplate>(item);
+                context.Intervals.Add(entity);
 
                 await context.SaveChangesAsync();
 
-                return await Task.FromResult(true);
+                return await Task.FromResult(entity.Id);
             }
         }
 

@@ -43,11 +43,12 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
         #region Methods
         private async Task AddHistoryRecordAsync(History item)
         {
+            var id = await HistoryService.AddItemAsync(Mapper.Map<HistoryDto>(item));
+            item.Id = id;
+
             Device.BeginInvokeOnMainThread(() => {
                 History.Insert(0, item);
             });
-            
-            await HistoryService.AddItemAsync(Mapper.Map<HistoryDto>(item));
         }
 
         public async Task InitializeAsync(INavigationParameters parameters)

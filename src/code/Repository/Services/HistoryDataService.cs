@@ -21,15 +21,16 @@ namespace RedSpartan.IntervalTraining.Repository.Services
             _contextFactory = contextFactory ?? throw new ArgumentNullException(nameof(contextFactory));
         }
 
-        public async Task<bool> AddItemAsync(HistoryDto item)
+        public async Task<int> AddItemAsync(HistoryDto item)
         {
             using (var context = _contextFactory.GetContext())
             {
-                context.Histories.Add(_mapper.Map<History>(item));
+                var entity = _mapper.Map<History>(item);
+                context.Histories.Add(entity);
 
                 await context.SaveChangesAsync();
 
-                return await Task.FromResult(true);
+                return await Task.FromResult(entity.Id);
             }
         }
 
