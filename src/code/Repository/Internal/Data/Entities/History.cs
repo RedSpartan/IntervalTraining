@@ -6,7 +6,7 @@ namespace RedSpartan.IntervalTraining.Repository.Internal.Data.Entities
     {
         public int Id { get; set; }
         public IntervalTemplate Template { get; set; }
-        public int TemplateId { get; set; }
+        public int? TemplateId { get; set; }
         public string Name { get; set; }
         public string Intervals { get; set; }
         public int TimeActiveSeconds { get; set; }

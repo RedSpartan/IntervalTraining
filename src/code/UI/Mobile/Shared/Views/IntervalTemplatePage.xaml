@@ -20,10 +20,16 @@
             </Grid.RowDefinitions>
 
             <Entry Text="{Binding Template.Name}"
+                   IsVisible="{Binding Template.IsNew}"
                    Placeholder="Name"
                    Grid.Row="0"
                    Grid.ColumnSpan="2"/>
 
+            <Label Text="{Binding Template.Name}"
+                   IsVisible="{Binding Template.IsNew, Converter={StaticResource Key=Inverter}}"
+                   Grid.Row="0"
+                   Grid.ColumnSpan="2"/>
+            
             <Entry Text="{Binding Template.TimeSeconds}"
                    Placeholder="Time Seconds"
                    Grid.Row="1"
