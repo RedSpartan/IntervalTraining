@@ -2,6 +2,7 @@
 using Prism.Commands;
 using Prism.Events;
 using Prism.Navigation;
+using Prism.Services;
 using RedSpartan.IntervalTraining.Repository.DTOs;
 using RedSpartan.IntervalTraining.Repository.Services;
 using RedSpartan.IntervalTraining.UI.Mobile.Shared.Events;
@@ -23,28 +24,32 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
         private IDataService<IntervalTemplateDto> IntervalService { get; }
         private IEventAggregator EventAggregator { get; }
         private IMapper Mapper { get; }
+        private IPageDialogService DialogService { get; }
         #endregion Services
 
         #region Commands
         public ICommand AddEditIntervalTemplateCommand { get; }
         public ICommand OpenTimerCommand { get; }
+        public ICommand DeleteTemplateCommand { get; }
         #endregion Commands
 
         #region Constructor
         public HomeViewModel(INavigationService navigationService,
             IDataService<IntervalTemplateDto> intervalService,
             IEventAggregator eventAggregator,
+            IPageDialogService dialogService,
             IMapper mapper)
             : base(navigationService)
         {
             Title = "Home";
             Mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             IntervalService = intervalService ?? throw new ArgumentNullException(nameof(intervalService));
-
+            DialogService = dialogService ?? throw new ArgumentNullException(nameof(dialogService));
             EventAggregator = eventAggregator ?? throw new ArgumentNullException(nameof(eventAggregator));
 
             AddEditIntervalTemplateCommand = new DelegateCommand<object>(async (item) => await AddEditTemplateAsync(item));
             OpenTimerCommand = new DelegateCommand<IntervalTemplate>(async (item) => await OpenTimerAsync(item));
+            DeleteTemplateCommand = new DelegateCommand<object>(async (item) => await DeleteTemplateAsync(item));
 
             EventAggregator.GetEvent<IntervalTemplateEvent>().Subscribe(async (item) => await OnIntervalTemplateChangeAsync(item));
         }
@@ -80,6 +85,16 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
                 nav.Add(nameof(IntervalTemplate), new IntervalTemplate());
             }
             await NavigationService.NavigateAsync("IntervalTemplatePage", nav, useModalNavigation: true);
+        }
+
+        private async Task DeleteTemplateAsync(object obj)
+        {
+            if (obj is IntervalTemplate item
+                && await DialogService.DisplayAlertAsync("Delete", $"You are about to delete template '{item.Name}', are you sure?", "Ok", "Cancel")
+                && await IntervalService.DeleteItemAsync(item.Id))
+            {
+                IntervalTemplates.Remove(item);
+            }
         }
 
         private async Task OnIntervalTemplateChangeAsync(IntervalTemplate item)

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace RedSpartan.IntervalTraining.Repository.Internal.Migrations
 {
-    public partial class Initial : Migration
+    public partial class InitialBuild : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -29,7 +29,7 @@ namespace RedSpartan.IntervalTraining.Repository.Internal.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    TemplateId = table.Column<int>(nullable: false),
+                    TemplateId = table.Column<int>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     Intervals = table.Column<string>(nullable: true),
                     TimeActiveSeconds = table.Column<int>(nullable: false),
@@ -44,7 +44,7 @@ namespace RedSpartan.IntervalTraining.Repository.Internal.Migrations
                         column: x => x.TemplateId,
                         principalTable: "Intervals",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(

@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RedSpartan.IntervalTraining.Repository.Internal.Data.Entities;
+using RedSpartan.IntervalTraining.Repository.Internal.Entities;
 
 namespace RedSpartan.IntervalTraining.Internal.Repository.Access
 {

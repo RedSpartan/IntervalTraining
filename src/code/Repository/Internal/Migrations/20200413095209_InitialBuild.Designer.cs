@@ -9,8 +9,8 @@ using RedSpartan.IntervalTraining.Internal.Repository.Access;
 namespace RedSpartan.IntervalTraining.Repository.Internal.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200413091614_NullableTemplateId")]
-    partial class NullableTemplateId
+    [Migration("20200413095209_InitialBuild")]
+    partial class InitialBuild
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -18,7 +18,7 @@ namespace RedSpartan.IntervalTraining.Repository.Internal.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.3");
 
-            modelBuilder.Entity("RedSpartan.IntervalTraining.Repository.Internal.Data.Entities.History", b =>
+            modelBuilder.Entity("RedSpartan.IntervalTraining.Repository.Internal.Entities.History", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -49,7 +49,7 @@ namespace RedSpartan.IntervalTraining.Repository.Internal.Migrations
                     b.ToTable("Histories");
                 });
 
-            modelBuilder.Entity("RedSpartan.IntervalTraining.Repository.Internal.Data.Entities.IntervalTemplate", b =>
+            modelBuilder.Entity("RedSpartan.IntervalTraining.Repository.Internal.Entities.IntervalTemplate", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -73,9 +73,9 @@ namespace RedSpartan.IntervalTraining.Repository.Internal.Migrations
                     b.ToTable("Intervals");
                 });
 
-            modelBuilder.Entity("RedSpartan.IntervalTraining.Repository.Internal.Data.Entities.History", b =>
+            modelBuilder.Entity("RedSpartan.IntervalTraining.Repository.Internal.Entities.History", b =>
                 {
-                    b.HasOne("RedSpartan.IntervalTraining.Repository.Internal.Data.Entities.IntervalTemplate", "Template")
+                    b.HasOne("RedSpartan.IntervalTraining.Repository.Internal.Entities.IntervalTemplate", "Template")
                         .WithMany("History")
                         .HasForeignKey("TemplateId");
                 });

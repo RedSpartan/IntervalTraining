@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using RedSpartan.IntervalTraining.Internal.Repository.Access;
 using RedSpartan.IntervalTraining.Repository.DTOs;
-using RedSpartan.IntervalTraining.Repository.Internal.Data.Entities;
+using RedSpartan.IntervalTraining.Repository.Internal.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

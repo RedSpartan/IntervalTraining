@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RedSpartan.IntervalTraining.Repository.Internal.Data.Entities
+namespace RedSpartan.IntervalTraining.Repository.Internal.Entities
 {
     public class History
     {

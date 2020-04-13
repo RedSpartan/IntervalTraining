@@ -69,6 +69,8 @@
                                             HeightRequest="35"
                                             WidthRequest="35"
                                             ImageSource="delete.png"
+                                            Command="{Binding BindingContext.DeleteTemplateCommand, Source={Reference This}}"
+                                            CommandParameter="{Binding .}"
                                             Grid.Column="0"
                                             Grid.Row="0" />
                                 </Grid>
