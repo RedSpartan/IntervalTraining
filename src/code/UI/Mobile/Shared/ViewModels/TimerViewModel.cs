@@ -103,7 +103,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
                 Queue.Enqueue(Queue.Peek());
             }
 
-            Device.BeginInvokeOnMainThread(() => Queue.Dequeue());
+            Queue.Dequeue();
 
             if (_finished || Queue.Count == 0)
             {
