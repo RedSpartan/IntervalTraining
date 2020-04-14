@@ -9,6 +9,7 @@ using RedSpartan.IntervalTraining.UI.Mobile.Shared.Events;
 using RedSpartan.IntervalTraining.UI.Mobile.Shared.Models;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -53,6 +54,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
             DeleteTemplateCommand = new DelegateCommand<object>(async (item) => await DeleteTemplateAsync(item));
 
             EventAggregator.GetEvent<IntervalTemplateEvent>().Subscribe(async (item) => await OnIntervalTemplateChangeAsync(item));
+            EventAggregator.GetEvent<HistoryEvent>().Subscribe(OnHistoryEvent);
         }
         #endregion Constructor
 
@@ -61,7 +63,19 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
         {
             foreach (var template in await IntervalService.GetItemsAsync())
             {
-                IntervalTemplates.Add(Mapper.Map<IntervalTemplate>(template));
+                var map = Mapper.Map<IntervalTemplate>(template);
+
+                foreach (var interval in template.Intervals)
+                {
+                    map.Intervals.Add(Mapper.Map<Interval>(interval));
+                }
+
+                foreach (var history in template.History)
+                {
+                    map.History.Add(Mapper.Map<History>(history));
+                }
+
+                IntervalTemplates.Add(map);
             }
         }
 
@@ -116,6 +130,16 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
             else
             {
                 await IntervalService.UpdateItemAsync(Mapper.Map<IntervalTemplateDto>(item));
+            }
+        }
+
+        private void OnHistoryEvent(History item)
+        {
+            var template = IntervalTemplates.FirstOrDefault(x => x.Id == item.TemplateId);
+
+            if(template != null)
+            {
+                template.History.Add(item);
             }
         }
 

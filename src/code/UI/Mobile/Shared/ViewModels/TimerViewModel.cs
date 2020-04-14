@@ -7,7 +7,6 @@ using RedSpartan.IntervalTraining.UI.Mobile.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Windows.Input;
-using Xamarin.Forms;
 
 namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
 {
@@ -111,7 +110,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
                 _finished = true;
                 _history.Stop = DateTime.UtcNow;
                 _history.Intervals = new List<Interval>(_compleatedIntervals);
-                EventAggregator.GetEvent<CreateHistoryEvent>().Publish(_history);
+                EventAggregator.GetEvent<HistoryEvent>().Publish(_history);
             }
             else
             {

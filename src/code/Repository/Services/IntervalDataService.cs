@@ -80,7 +80,7 @@ namespace RedSpartan.IntervalTraining.Repository.Services
         {
             using (var context = _contextFactory.GetContext())
             {
-                var items = await context.Intervals.ToListAsync().ConfigureAwait(false);
+                var items = await context.Intervals.Include(x => x.History).ToListAsync().ConfigureAwait(false);
 
                 return _mapper.Map<List<IntervalTemplateDto>>(items);
             }

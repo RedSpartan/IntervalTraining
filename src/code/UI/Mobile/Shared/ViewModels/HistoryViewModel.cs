@@ -36,7 +36,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
             HistoryService = historyService ?? throw new ArgumentNullException(nameof(historyService));
             Mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
 
-            EventAggregator.GetEvent<CreateHistoryEvent>().Subscribe(async (item) => await AddHistoryRecordAsync(item));
+            EventAggregator.GetEvent<HistoryEvent>().Subscribe(async (item) => await AddHistoryRecordAsync(item));
         }
         #endregion Constructors
 
@@ -62,7 +62,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
 
         public override void Destroy()
         {
-            EventAggregator.GetEvent<CreateHistoryEvent>().Unsubscribe(async (item) => await AddHistoryRecordAsync(item));
+            EventAggregator.GetEvent<HistoryEvent>().Unsubscribe(async (item) => await AddHistoryRecordAsync(item));
             base.Destroy();
         }
         #endregion Methods
