@@ -18,6 +18,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
         private string _timeRemaining = "00:00.000";
         private bool _started = false;
         private bool _finished = false;
+        private string _finaliseButtonLabel = "Close";
         private readonly History _history = new History();
         private readonly Stack<Interval> _compleatedIntervals = new Stack<Interval>();
         #endregion  Fields
@@ -41,6 +42,11 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
             set => SetProperty(ref _timeRemaining, value);
         }
 
+        public string FinaliseButtonLabel 
+        {
+            get => _finaliseButtonLabel;
+            set => SetProperty(ref _finaliseButtonLabel, value);
+        }
         #endregion Properties
 
         #region Collections
@@ -53,7 +59,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
 
         #region Commands
         public ICommand StartCommand { get; }
-        public ICommand StopCommand { get; }
+        public ICommand FinaliseCommand { get; }
         public ICommand CloseCommand { get; }
         #endregion Commands
 
@@ -64,12 +70,12 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
         {
             EventAggregator = eventAggregator ?? throw new ArgumentNullException(nameof(eventAggregator));
             StartCommand = new DelegateCommand(Start);
-            StopCommand = new DelegateCommand(Stop);
+            FinaliseCommand = new DelegateCommand(Finalise);
             CloseCommand = new DelegateCommand(async () => await NavigationService.GoBackAsync());
         }
         #endregion Constructor
 
-        #region Methods
+        #region Public Methods
         public override void Initialize(INavigationParameters parameters)
         {
             if (parameters.ContainsKey(nameof(IntervalTemplate)))
@@ -92,12 +98,20 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
             _history.Name = IntervalTemplate.Name;
         }
 
+        public override void Destroy()
+        {
+            Timer.Dispose();
+            base.Destroy();
+        }
+        #endregion Public Methods
+
+        #region Private Methods
         private void OnCountDownFinish()
         {
             _history.TimeActiveSeconds += (int)Queue.Peek().Time.TotalSeconds;
             _compleatedIntervals.Push(Queue.Peek().Clone());
-            
-            if(IntervalTemplate.Iterations == null && IntervalTemplate.TimeSeconds == null)
+
+            if (IntervalTemplate.Iterations == null && IntervalTemplate.TimeSeconds == null)
             {
                 Queue.Enqueue(Queue.Peek());
             }
@@ -108,9 +122,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
             {
                 _started = false;
                 _finished = true;
-                _history.Stop = DateTime.UtcNow;
-                _history.Intervals = new List<Interval>(_compleatedIntervals);
-                EventAggregator.GetEvent<HistoryEvent>().Publish(_history);
+                FinaliseButtonLabel = "Finish";
             }
             else
             {
@@ -120,18 +132,33 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
 
         private void Start()
         {
-            if(_history.Start == DateTime.MinValue)
+            if (_history.Start == DateTime.MinValue)
             {
                 _history.Start = DateTime.UtcNow;
             }
-            _started = true; 
+            _started = true;
             Timer.Start();
+            FinaliseButtonLabel = "Stop";
         }
 
-        private void Stop()
+        private async void Finalise()
         {
-            Timer.Pause();
-            _started = false;
+            switch (FinaliseButtonLabel)
+            {
+                case "Stop":
+                    Timer.Pause();
+                    _started = false;
+                    FinaliseButtonLabel = "Finish";
+                    break;
+                case "Finish":
+                    FinaliseHistory();
+                    await NavigationService.GoBackAsync();
+                    break;
+                default:
+                    await NavigationService.GoBackAsync();
+                    break;
+            }
+            
         }
 
         private void SetupTimer()
@@ -140,11 +167,18 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
             Timer.SetTime(timespan.Minutes, timespan.Seconds);
 
             TimeRemaining = Timer.TimeLeftStr;
-            
+
             if (_started)
             {
                 Timer.Start();
             }
+        }
+
+        private void FinaliseHistory()
+        {
+            _history.Stop = DateTime.UtcNow;
+            _history.Intervals = new List<Interval>(_compleatedIntervals);
+            EventAggregator.GetEvent<HistoryEvent>().Publish(_history);
         }
 
         private void CreateQueue(IntervalTemplate template)
@@ -159,7 +193,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
                     }
                 }
             }
-            else if(template.TimeSeconds != null)
+            else if (template.TimeSeconds != null)
             {
                 double totalTime = 0;
                 while (totalTime < template.TimeSeconds)
@@ -169,7 +203,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
                         totalTime += item.Time.TotalSeconds;
                         Queue.Enqueue(item);
 
-                        if(totalTime >= template.TimeSeconds)
+                        if (totalTime >= template.TimeSeconds)
                         {
                             break;
                         }
@@ -184,12 +218,6 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
                 }
             }
         }
-
-        public override void Destroy()
-        {
-            Timer.Dispose();
-            base.Destroy();
-        }
-        #endregion Methods
+        #endregion Private Methods
     }
 }

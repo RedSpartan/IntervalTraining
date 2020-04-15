@@ -1,5 +1,4 @@
-﻿using ImTools;
-using Prism.Mvvm;
+﻿using Prism.Mvvm;
 using System;
 using System.Collections.ObjectModel;
 
@@ -17,6 +16,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.Models
         #region Properties
         public int Id { get => _id; set => SetProperty(ref _id, value); }
         public string Name { get => _name; set => SetProperty(ref _name, value); }
+
         public int? TimeSeconds 
         { 
             get => _timeSeconds; 

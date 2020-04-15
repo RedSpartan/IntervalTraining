@@ -8,14 +8,16 @@
              x:Class="RedSpartan.IntervalTraining.UI.Mobile.Shared.Views.TimerPage">
     <ContentPage.Content>
         <StackLayout>
+            
             <Label Text="{Binding TimeRemaining}" />
+            
             <Grid>
                 <Button Text="Start"
                         Grid.Column="0"
                         Command="{Binding StartCommand}" />
-                <Button Text="Stop"
+                <Button Text="{Binding FinaliseButtonLabel}"
                         Grid.Column="1"
-                        Command="{Binding StopCommand}" />
+                        Command="{Binding FinaliseCommand}" />
             </Grid>
 
             <syncfusion:SfListView ItemsSource="{Binding Queue}"
