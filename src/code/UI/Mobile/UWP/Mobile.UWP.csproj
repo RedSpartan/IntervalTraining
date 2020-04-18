@@ -108,6 +108,7 @@
     <Content Include="delete.png" />
     <Content Include="edit.png" />
     <Content Include="lambda.png" />
+    <Content Include="logo_lf.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -136,6 +137,11 @@
     <PackageReference Include="Prism.DryIoc.Forms" Version="7.2.0.1422" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Fonts\Montserrat-Bold.ttf" />
+    <Content Include="Assets\Fonts\Montserrat-Medium.ttf" />
+    <Content Include="Assets\Fonts\Montserrat-Regular.ttf" />
+    <Content Include="Assets\Fonts\Montserrat-SemiBold.ttf" />
+    <Content Include="Assets\Fonts\UIFontIcons.ttf" />
     <None Include="RedSpartan.IntervalTraining.UI.Mobile.UWP_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +154,7 @@
       <Name>Mobile.Shared</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

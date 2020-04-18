@@ -18,6 +18,14 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
 {
     public class HomeViewModel : ViewModelBase, IInitializeAsync
     {
+        #region Fields
+        private IntervalTemplate _selectedItem;
+        #endregion Fields
+        
+        #region Properties
+        public IntervalTemplate SelectedItem { get => _selectedItem; set => SetProperty(ref _selectedItem, value); }
+        #endregion Properties
+
         #region Collections
         public ObservableCollection<IntervalTemplate> IntervalTemplates { get; } = new ObservableCollection<IntervalTemplate>();
         #endregion Collections
@@ -91,9 +99,9 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
         private async Task AddEditTemplateAsync(object obj)
         {
             var nav = new NavigationParameters();
-            if(obj is IntervalTemplate item)
+            if (obj is IntervalTemplate item)
             {
-                nav.Add(nameof(IntervalTemplate), item); 
+                nav.Add(nameof(IntervalTemplate), item);
             }
             else
             {
@@ -137,10 +145,16 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
         {
             var template = IntervalTemplates.FirstOrDefault(x => x.Id == item.TemplateId);
 
-            if(template != null)
+            if (template != null)
             {
                 template.History.Add(item);
             }
+        }
+
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            SelectedItem = null;
+            base.OnNavigatedTo(parameters);
         }
 
         public override void Destroy()

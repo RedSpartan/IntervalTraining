@@ -8,6 +8,7 @@
             xmlns:views="clr-namespace:RedSpartan.IntervalTraining.UI.Mobile.Shared.Views"
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             android:TabbedPage.ToolbarPlacement="Bottom"
+            Style="{x:StaticResource Key=TabbedPageStyle}"
             Title="{Binding Title}">
     <NavigationPage Title="HOME">
         <x:Arguments>

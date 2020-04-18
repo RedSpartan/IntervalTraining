@@ -31,16 +31,13 @@
                                 <RowDefinition Height="0.4*" />
                                 <RowDefinition Height="0.6*" />
                             </Grid.RowDefinitions>
-                            <Label Text="{Binding Name}" FontAttributes="Bold" TextColor="Teal" FontSize="21" />
-                            <Label Grid.Row="1" Text="{Binding TimeSeconds}" TextColor="Teal" FontSize="15"/>
+                            <Label Text="{Binding Name}"/>
+                            <Label Grid.Row="1" Text="{Binding TimeSeconds}"/>
                         </Grid>
                     </DataTemplate>
                 </syncfusion:SfListView.ItemTemplate>
             </syncfusion:SfListView>
             
-            <Button Text="Stop"
-                        Grid.Column="1"
-                        Command="{Binding CloseCommand}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

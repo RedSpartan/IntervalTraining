@@ -12,23 +12,24 @@
              x:Name="This">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add" 
+        <ToolbarItem Text="Add"
                      Command="{Binding AddEditIntervalTemplateCommand}" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="7*"/>
             </Grid.RowDefinitions>
-            
-            <Image Source="lambda.png"
+
+            <Image Source="logo_lf.png"
                    Grid.Row="0" />
-            
+
             <syncfusion:SfListView ItemsSource="{Binding IntervalTemplates}"
-                                   ItemSize="100"
+                                   AutoFitMode="Height"
                                    AllowSwiping="True"
-                                   Grid.Row="1">
+                                   Grid.Row="1"
+                                   SelectedItem="{Binding SelectedItem}">
 
                 <syncfusion:SfListView.Behaviors>
                     <prism:EventToCommandBehavior EventName="ItemTapped"
@@ -36,103 +37,77 @@
                                                   EventArgsParameterPath="ItemData" />
                 </syncfusion:SfListView.Behaviors>
 
-                <syncfusion:SfListView.LeftSwipeTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid BackgroundColor="#009EDA" 
-                                  HorizontalOptions="Fill" 
-                                  VerticalOptions="Fill" 
-                                  Grid.Column="0">
-                                <Grid VerticalOptions="Center" 
-                                      HorizontalOptions="Center">
-                                    <Button BackgroundColor="Transparent"
-                                            HeightRequest="50"
-                                            WidthRequest="50"
-                                            ImageSource="edit.png"
-                                            Command="{Binding BindingContext.AddEditIntervalTemplateCommand, Source={Reference This}}"
-                                            CommandParameter="{Binding .}"
-                                            Grid.Column="0"
-                                            Grid.Row="0" />
-                                </Grid>
-                            </Grid>
-                            <Grid BackgroundColor="#DC595F" 
-                                  HorizontalOptions="Fill" 
-                                  VerticalOptions="Fill" 
-                                  Grid.Column="1">
-                                <Grid VerticalOptions="Center" 
-                                      HorizontalOptions="Center">
-                                    <Button BackgroundColor="Transparent"
-                                            HeightRequest="35"
-                                            WidthRequest="35"
-                                            ImageSource="delete.png"
-                                            Command="{Binding BindingContext.DeleteTemplateCommand, Source={Reference This}}"
-                                            CommandParameter="{Binding .}"
-                                            Grid.Column="0"
-                                            Grid.Row="0" />
-                                </Grid>
-                            </Grid>
-                        </Grid>
-                    </DataTemplate>
-                </syncfusion:SfListView.LeftSwipeTemplate>
-
                 <syncfusion:SfListView.ItemTemplate>
                     <DataTemplate>
-                        <Grid Padding="10">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="0.4*" />
-                                <RowDefinition Height="0.6*" />
-                            </Grid.RowDefinitions>
-                            
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="0.8*" />
-                                <ColumnDefinition Width="0.2*" />
-                            </Grid.ColumnDefinitions>
-                            
-                            <Label Text="{Binding Name}" 
-                                   FontAttributes="Bold" 
-                                   TextColor="Teal" 
-                                   FontSize="21"
-                                   Grid.Row="0"
-                                   Grid.Column="0" />
+                        <Frame Style="{StaticResource Key=ListItem}"
+                               Padding="10"
+                               Margin="5">
+                            <StackLayout Padding="5"
+                                         Orientation="Horizontal">
+                                <Grid HorizontalOptions="StartAndExpand">
+                                    <Label Text="{Binding Name}"
+                                           Style="{StaticResource Key=LargeTextLabel}"
+                                           Grid.Row="0"
+                                           Grid.Column="0" />
 
-                            <Label TextColor="Teal" 
-                                   FontSize="15"
-                                   Grid.Row="1"
-                                   Grid.Column="0">
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <FormattedString.Spans>
-                                            <Span Text="Intervals "></Span>
-                                            <Span Text="{Binding TotalIntervals}"></Span>
-                                        </FormattedString.Spans>
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
+                                    <Label Grid.Row="1"
+                                           Grid.Column="0">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <FormattedString.Spans>
+                                                    <Span Text="Intervals "></Span>
+                                                    <Span Text="{Binding TotalIntervals}"></Span>
+                                                </FormattedString.Spans>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </Grid>
+                                
+                                <Grid HorizontalOptions="CenterAndExpand">
+                                    <Label Text="{Binding IntervalType}"
+                                       Style="{StaticResource Key=LargeTextLabel}"
+                                       Grid.Row="0"
+                                       Grid.Column="1" />
 
-                            <Label TextColor="Teal" 
-                                   FontSize="15"
-                                   Text="{Binding IntervalType}"
-                                   Grid.Row="0"
-                                   Grid.Column="1" />
+                                    <Label Grid.Row="1"
+                                       Grid.Column="1">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <FormattedString.Spans>
+                                                    <Span Text="Usage " />
+                                                    <Span Text="{Binding Usage}" />
+                                                </FormattedString.Spans>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </Grid>
+                                
+                                <Grid WidthRequest="30"
+                                      HorizontalOptions="End">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="5*" />
+                                        <RowDefinition Height="5*" />
+                                    </Grid.RowDefinitions>
 
-                            <Label TextColor="Teal" 
-                                   FontSize="15"
-                                   Grid.Row="1"
-                                   Grid.Column="1">
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <FormattedString.Spans>
-                                            <Span Text="Usage "></Span>
-                                            <Span Text="{Binding Usage}"></Span>
-                                        </FormattedString.Spans>
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
-                        </Grid>
+                                    <Image Source="edit.png"
+                                           Margin="0"
+                                           Grid.Row="0">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding BindingContext.AddEditIntervalTemplateCommand, Source={Reference This}}"
+                                                                  CommandParameter="{Binding .}" />
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                    <Image Source="delete.png"
+                                           Margin="0"
+                                           Grid.Row="1">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding BindingContext.DeleteTemplateCommand, Source={Reference This}}"
+                                                                  CommandParameter="{Binding .}" />
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </Grid>
+                            </StackLayout>
+                        </Frame>
                     </DataTemplate>
                 </syncfusion:SfListView.ItemTemplate>
             </syncfusion:SfListView>

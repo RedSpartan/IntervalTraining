@@ -60,10 +60,9 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
         #region Commands
         public ICommand StartCommand { get; }
         public ICommand FinaliseCommand { get; }
-        public ICommand CloseCommand { get; }
         #endregion Commands
 
-        #region Constructor
+        #region Constructors
         public TimerViewModel(INavigationService navigationService,
             IEventAggregator eventAggregator)
             : base(navigationService)
@@ -71,9 +70,8 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
             EventAggregator = eventAggregator ?? throw new ArgumentNullException(nameof(eventAggregator));
             StartCommand = new DelegateCommand(Start);
             FinaliseCommand = new DelegateCommand(Finalise);
-            CloseCommand = new DelegateCommand(async () => await NavigationService.GoBackAsync());
         }
-        #endregion Constructor
+        #endregion Constructors
 
         #region Public Methods
         public override void Initialize(INavigationParameters parameters)

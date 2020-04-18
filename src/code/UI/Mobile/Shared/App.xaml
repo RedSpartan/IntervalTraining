@@ -7,6 +7,7 @@
              x:Class="RedSpartan.IntervalTraining.UI.Mobile.Shared.App">
 	<Application.Resources>
 
+        <ResourceDictionary Source="Themes/DefaultTheme.xaml" />
 		<!-- Application resource dictionary -->
 
         <ioc:ContainerProvider x:TypeArguments="converter:BooleanInverterConverter"
