@@ -221,25 +221,16 @@
     <BundleResource Include="Resources\lambda%402x.png" />
   </ItemGroup>
   <ItemGroup>
+    <BundleResource Include="Resources\logo_lf.png" />
+  </ItemGroup>
+  <ItemGroup>
     <BundleResource Include="Resources\edit.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\edit%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\edit%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\delete.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\delete%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\delete%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\logo_lf.png" />
+    <BundleResource Include="Resources\order.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
