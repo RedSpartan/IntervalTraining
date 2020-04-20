@@ -89,10 +89,10 @@
         <Setter Property="BackgroundColor" Value="{DynamicResource Colour-GrayBlack}" />
     </Style>
 
-    <!-- -->
+    <!-- ListView Item -->
     <Style x:Key="ListItem" TargetType="Frame">
-        <Setter Property="BackgroundColor" Value="{DynamicResource Key=Colour-PrimaryTransparent}" />
-        <Setter Property="BorderColor" Value="{DynamicResource Key=Colour-Primary}" />
+        <!--<Setter Property="BackgroundColor" Value="{DynamicResource Key=Colour-PrimaryTransparent}" />
+        <Setter Property="BorderColor" Value="{DynamicResource Key=Colour-Primary}" />-->
         <Setter Property="CornerRadius" Value="4" />
         <Setter Property="HasShadow" Value="True" />
     </Style>

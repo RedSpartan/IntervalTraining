@@ -31,6 +31,7 @@
                                    Grid.Row="1"
                                    SelectedItem="{Binding SelectedItem}"
                                    DragStartMode="OnDragIndicator"
+                                   ItemDragging="listView_ItemDragging"
                                    x:Name="listView">
 
                 <syncfusion:SfListView.Behaviors>
@@ -42,6 +43,8 @@
                 <syncfusion:SfListView.ItemTemplate>
                     <DataTemplate>
                         <Frame Style="{StaticResource Key=ListItem}"
+                               BackgroundColor="{Binding InMotion, Converter={StaticResource Key=BoolTransparency}, ConverterParameter={StaticResource Key=Colour-Primary}}"
+                               BorderColor="{StaticResource Key=Colour-Primary}"
                                Padding="10"
                                Margin="5">
                             <StackLayout Padding="5"

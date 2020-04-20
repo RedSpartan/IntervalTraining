@@ -11,10 +11,12 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.Models
         private string _name;
         private int? _timeSeconds;
         private int? _iterations;
+        private bool _inMotion;
         #endregion Fields
 
         #region Properties
         public int Id { get => _id; set => SetProperty(ref _id, value); }
+        
         public string Name { get => _name; set => SetProperty(ref _name, value); }
 
         public int? TimeSeconds 
@@ -28,6 +30,8 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.Models
             get => _iterations; 
             set => SetProperty(ref _iterations, value, () => RaisePropertyChanged(nameof(IntervalType))); 
         }
+        
+        public bool InMotion { get => _inMotion; set => SetProperty(ref _inMotion, value); }
 
         public bool IsNew => Id == 0;
         public int TotalIntervals => Intervals.Count;

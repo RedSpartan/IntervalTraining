@@ -12,5 +12,7 @@
 
         <ioc:ContainerProvider x:TypeArguments="converter:BooleanInverterConverter"
                                x:Key="Inverter" />
+        <ioc:ContainerProvider x:TypeArguments="converter:BooleanToTransparency"
+                               x:Key="BoolTransparency" />
 	</Application.Resources>
 </prism:PrismApplication>

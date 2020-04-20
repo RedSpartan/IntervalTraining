@@ -21,7 +21,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
         #region Fields
         private IntervalTemplate _selectedItem;
         #endregion Fields
-        
+
         #region Properties
         public IntervalTemplate SelectedItem { get => _selectedItem; set => SetProperty(ref _selectedItem, value); }
         #endregion Properties
@@ -32,6 +32,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
 
         #region Services
         private IDataService<IntervalTemplateDto> IntervalService { get; }
+
         private IEventAggregator EventAggregator { get; }
         private IMapper Mapper { get; }
         private IPageDialogService DialogService { get; }
