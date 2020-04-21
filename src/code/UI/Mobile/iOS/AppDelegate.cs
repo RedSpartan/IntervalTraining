@@ -3,6 +3,7 @@ using Prism;
 using Prism.Ioc;
 using RedSpartan.IntervalTraining.UI.Mobile.Shared;
 using Syncfusion.ListView.XForms.iOS;
+using Syncfusion.XForms.iOS.DataForm;
 using Syncfusion.XForms.iOS.EffectsView;
 using UIKit;
 
@@ -27,6 +28,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.iOS
             global::Xamarin.Forms.Forms.Init();
             SfListViewRenderer.Init();
             SfEffectsViewRenderer.Init();
+            SfDataFormRenderer.Init();
             LoadApplication(new App(new iOSInitializer()));
 
             return base.FinishedLaunching(app, options);

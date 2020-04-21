@@ -1,4 +1,12 @@
 ﻿using Syncfusion.ListView.XForms.UWP;
+using Syncfusion.SfAutoComplete.XForms.UWP;
+using Syncfusion.SfNumericTextBox.XForms.UWP;
+using Syncfusion.SfNumericUpDown.XForms.UWP;
+using Syncfusion.XForms.UWP.Buttons;
+using Syncfusion.XForms.UWP.ComboBox;
+using Syncfusion.XForms.UWP.DataForm;
+using Syncfusion.XForms.UWP.MaskedEdit;
+using Syncfusion.XForms.UWP.TextInputLayout;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -43,7 +51,17 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.UWP
 
                 var assembliesToInclude = new List<Assembly>
                 {
-                    typeof(SfListViewRenderer).GetTypeInfo().Assembly
+                    typeof(SfListViewRenderer).GetTypeInfo().Assembly,
+                    typeof(SfDataFormRenderer).GetTypeInfo().Assembly,
+                    typeof(SfNumericTextBoxRenderer).GetTypeInfo().Assembly,
+                    typeof(SfNumericUpDownRenderer).GetTypeInfo().Assembly,
+                    typeof(SfSegmentedControlRenderer).GetTypeInfo().Assembly,
+                    typeof(SfComboBoxRenderer).GetTypeInfo().Assembly,
+                    typeof(SfCheckBoxRenderer).GetTypeInfo().Assembly,
+                    typeof(SfRadioButtonRenderer).GetTypeInfo().Assembly,
+                    typeof(SfMaskedEditRenderer).GetTypeInfo().Assembly,
+                    typeof(SfTextInputLayoutRenderer).GetTypeInfo().Assembly,
+                    typeof(SfAutoCompleteRenderer).GetTypeInfo().Assembly
                 };
 
                 Xamarin.Forms.Forms.Init(e, assembliesToInclude);

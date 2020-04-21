@@ -5,71 +5,45 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
-             x:Class="RedSpartan.IntervalTraining.UI.Mobile.Shared.Views.IntervalTemplatePage">
+             x:Class="RedSpartan.IntervalTraining.UI.Mobile.Shared.Views.IntervalTemplatePage"
+             Style="{StaticResource Key=Page}">
     <ContentPage.Content>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30*"/>
-                <RowDefinition Height="30"/>
-            </Grid.RowDefinitions>
+        <StackLayout Padding="10">
 
             <Entry Text="{Binding Template.Name}"
                    IsVisible="{Binding Template.IsNew}"
-                   Placeholder="Name"
-                   Grid.Row="0"
-                   Grid.ColumnSpan="2"/>
+                   Placeholder="Name" />
 
             <Label Text="{Binding Template.Name}"
                    IsVisible="{Binding Template.IsNew, Converter={StaticResource Key=Inverter}}"
-                   Grid.Row="0"
-                   Grid.ColumnSpan="2"/>
+                   Style="{StaticResource Key=HeadingLabel}" />
             
             <Entry Text="{Binding Template.TimeSeconds}"
-                   Placeholder="Time Seconds"
-                   Grid.Row="1"
-                   Grid.ColumnSpan="2"/>
+                   Placeholder="Time Seconds" />
 
             <Entry Text="{Binding Template.Iterations}"
-                   Placeholder="No. Iterations"
-                   Grid.Row="2"
-                   Grid.ColumnSpan="2"/>
+                   Placeholder="No. Iterations" />
 
             <BoxView HeightRequest="2"
-                     Color="Black"
-                     Grid.Row="3"
-                     Grid.ColumnSpan="2"/>
+                     Color="Black" />
 
             <Entry Text="{Binding IntervalName}"
-                   Placeholder="Interval Name"
-                   Grid.Row="4"
-                   Grid.ColumnSpan="2"/>
+                   Placeholder="Interval Name" />
 
             <Entry Text="{Binding IntervalTimeSeconds}"
-                   Placeholder="Interval Time Seconds"
-                   Grid.Row="5"
-                   Grid.ColumnSpan="2"/>
+                   Placeholder="Interval Time Seconds" />
+            
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Add Interval"
+                        Command="{Binding AddNewIntervalCommand}"
+                        IsEnabled="{Binding IsBusy, Converter={StaticResource Inverter}}" />
 
-            <Button Text="Add Interval"
-                    Command="{Binding AddNewIntervalCommand}"
-                    IsEnabled="{Binding IsBusy, Converter={StaticResource Inverter}}"
-                    Grid.Row="6"
-                    Grid.Column="0"/>
-
-            <Label Text="{Binding Template.TotalIntervals}"
-                   Grid.Row="6"
-                   Grid.Column="1"/>
-
+                <Label Text="{Binding Template.TotalIntervals}" />
+            </StackLayout>
+            
             <syncfusion:SfListView ItemsSource="{Binding Template.Intervals}"
                                    ItemSize="100"
-                                   Grid.Row="7"
-                                   Grid.ColumnSpan="2">
+                                   VerticalOptions="StartAndExpand">
                 <syncfusion:SfListView.ItemTemplate>
                     <DataTemplate>
                         <Grid Padding="10">
@@ -84,17 +58,19 @@
                 </syncfusion:SfListView.ItemTemplate>
             </syncfusion:SfListView>
 
-            <Button Text="Cancel"
-                    Command="{Binding CancelCommand}"
-                    IsEnabled="{Binding IsBusy, Converter={StaticResource Inverter}}"
-                    Grid.Row="8"
-                    Grid.Column="0" />
+            <Grid>
+                <Button Text="Cancel"
+                        Command="{Binding CancelCommand}"
+                        IsEnabled="{Binding IsBusy, Converter={StaticResource Inverter}}"
+                        Grid.Row="0"
+                        Grid.Column="0" />
 
-            <Button Text="Save"
-                    Command="{Binding AddNewIntervalTemplateCommand}"
-                    IsEnabled="{Binding IsBusy, Converter={StaticResource Inverter}}"
-                    Grid.Row="8"
-                    Grid.Column="1" />
-        </Grid>
+                <Button Text="Save"
+                        Command="{Binding AddNewIntervalTemplateCommand}"
+                        IsEnabled="{Binding IsBusy, Converter={StaticResource Inverter}}"
+                        Grid.Row="0"
+                        Grid.Column="1" />
+            </Grid>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>
