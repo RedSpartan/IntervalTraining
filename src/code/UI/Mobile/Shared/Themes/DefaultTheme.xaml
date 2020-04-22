@@ -3,21 +3,18 @@
                     xmlns="http://xamarin.com/schemas/2014/forms"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-    <Color x:Key="Colour-Primary">#00ffff</Color>
-    <Color x:Key="Colour-PrimaryTransparent">#3300ffff</Color>
-    <Color x:Key="Colour-PrimaryDark">#1a5ac6</Color>
-    <Color x:Key="Colour-PrimaryDarken">#174fb0</Color>
-    <Color x:Key="Colour-PrimaryLighter">#73a0ed</Color>
-    <Color x:Key="Colour-PrimaryLight">#cdddf9</Color>
-    <Color x:Key="Colour-PrimaryGradient">#00acff</Color>
+    <Color x:Key="Colour-PrimaryDark">#1b1f37</Color>
+    <Color x:Key="Colour-Primary">#242c4a</Color>
+    <Color x:Key="Colour-PrimaryLight">#343d60</Color>
+    <Color x:Key="Colour-PrimaryLighter">#aab8ec</Color>
+
     <Color x:Key="Colour-Secondary">#d54381</Color>
     <Color x:Key="Colour-SecondaryTransparent">#33d54381</Color>
     <Color x:Key="Colour-SecondaryGradient">#7644ad</Color>
 
-    <Color x:Key="Colour-Green">#7ed321</Color>
-    <Color x:Key="Colour-Red">#ff4a4a</Color>
-    <Color x:Key="Colour-Orange">#ff844a</Color>
-    <Color x:Key="Colour-Blue">#4acaff</Color>
+    <Color x:Key="Colour-Green">#0096a1</Color>
+    <Color x:Key="Colour-Red">#ff5c7f</Color>
+    <Color x:Key="Colour-Blue">#00bbd3</Color>
     <Color x:Key="Colour-Error">#ff4a4a</Color>
     <Color x:Key="Colour-Transparent">#00ffffff</Color>
     <Color x:Key="Colour-HyperLink">#567cd7</Color>
@@ -33,7 +30,7 @@
     <Color x:Key="Colour-Gray800">#4a515e</Color>
     <Color x:Key="Colour-Gray900">#333942</Color>
     <Color x:Key="Colour-GrayBlack">#000000</Color>
-    <Color x:Key="Colour-GrayWhite">#ffffff</Color>
+    <Color x:Key="Colour-GrayWhite">#eef7ff</Color>
 
     <OnPlatform x:Key="Font-Icons" x:TypeArguments="x:String">
         <OnPlatform.Platforms>
@@ -77,20 +74,20 @@
     
     <!-- Common style for Navigation pages -->
     <Style TargetType="NavigationPage" ApplyToDerivedTypes="True">
-        <Setter Property="BackgroundColor" Value="{StaticResource Colour-GrayBlack}" />
-        <Setter Property="BarBackgroundColor" Value="{StaticResource Colour-GrayBlack}" />
-        <Setter Property="BarTextColor" Value="{StaticResource Colour-Gray200}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource Colour-PrimaryDark}" />
+        <Setter Property="BarBackgroundColor" Value="{StaticResource Colour-Primary}" />
+        <Setter Property="BarTextColor" Value="{StaticResource Colour-GrayWhite}" />
     </Style>
 
     <Style x:Key="TabbedPageStyle" TargetType="TabbedPage" ApplyToDerivedTypes="True">
-        <Setter Property="SelectedTabColor" Value="{DynamicResource Colour-Gray200}" />
-        <Setter Property="UnselectedTabColor" Value="{DynamicResource Colour-Gray700}" />
-        <Setter Property="BarBackgroundColor" Value="{DynamicResource Colour-GrayBlack}" />
-        <Setter Property="BackgroundColor" Value="{DynamicResource Colour-GrayBlack}" />
+        <Setter Property="SelectedTabColor" Value="{DynamicResource Colour-GrayWhite}" />
+        <Setter Property="UnselectedTabColor" Value="{DynamicResource Colour-Gray500}" />
+        <Setter Property="BarBackgroundColor" Value="{DynamicResource Colour-Primary}" />
+        <Setter Property="BackgroundColor" Value="{DynamicResource Colour-PrimaryDark}" />
     </Style>
 
     <Style x:Key="Page" TargetType="Page" ApplyToDerivedTypes="True">
-        <Setter Property="BackgroundColor" Value="{DynamicResource Colour-GrayBlack}" />
+        <Setter Property="BackgroundColor" Value="{DynamicResource Colour-PrimaryDark}" />
     </Style>
     
     <!-- ListView Item -->
@@ -106,7 +103,8 @@
 
     <!-- Entry -->
     <Style TargetType="Entry">
-        <Setter Property="BackgroundColor" Value="{StaticResource Colour-Gray500}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource Colour-Gray100}" />
+        <Setter Property="PlaceholderColor" Value="{StaticResource Colour-Gray100}" />
     </Style>
 
     <!-- Common style for content pages -->
@@ -116,13 +114,14 @@
 
     <!-- Common styles for labels -->
     <Style TargetType="Label">
-        <Setter Property="TextColor" Value="{DynamicResource Colour-Gray200}" />
+        <Setter Property="TextColor" Value="{DynamicResource Colour-GrayWhite}" />
+        <Setter Property="FontFamily" Value="{StaticResource Font-Regular}" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="LineHeight" Value="1.25" />
     </Style>
 
     <Style x:Key="LargeTextLabel" TargetType="Label">
-        <Setter Property="TextColor" Value="{DynamicResource Colour-Gray200}" />
+        <Setter Property="TextColor" Value="{DynamicResource Colour-GrayWhite}" />
         <Setter Property="FontFamily" Value="{StaticResource Font-SemiBold}" />
         <Setter Property="FontSize" Value="18" />
         <Setter Property="LineHeight" Value="1.25" />
@@ -130,12 +129,14 @@
     
     <Style x:Key="ErrorLabel" TargetType="Label">
         <Setter Property="TextColor" Value="{DynamicResource Colour-Error}" />
+        <Setter Property="FontFamily" Value="{StaticResource Font-Regular}" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="LineHeight" Value="1.25" />
     </Style>
 
     <Style x:Key="HeadingLabel" TargetType="Label">
         <Setter Property="TextColor" Value="{DynamicResource Colour-GrayWhite}" />
+        <Setter Property="FontFamily" Value="{StaticResource Font-Bold}" />
         <Setter Property="FontSize" Value="20" />
         <Setter Property="LineHeight" Value="1.25" />
     </Style>

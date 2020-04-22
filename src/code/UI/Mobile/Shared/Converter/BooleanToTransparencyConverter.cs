@@ -6,7 +6,7 @@ using Xamarin.Forms.Internals;
 namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.Converter
 {
     [Preserve(AllMembers = true)]
-    public class BooleanToTransparency : IValueConverter
+    public class BooleanToTransparencyConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

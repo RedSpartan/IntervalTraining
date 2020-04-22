@@ -38,7 +38,8 @@
                         Command="{Binding AddNewIntervalCommand}"
                         IsEnabled="{Binding IsBusy, Converter={StaticResource Inverter}}" />
 
-                <Label Text="{Binding Template.TotalIntervals}" />
+                <Label Text="{Binding Template.TotalIntervals}"
+                       Style="{StaticResource Key=HeadingLabel}" />
             </StackLayout>
             
             <syncfusion:SfListView ItemsSource="{Binding Template.Intervals}"
@@ -52,25 +53,23 @@
                                 <RowDefinition Height="0.6*" />
                             </Grid.RowDefinitions>
                             <Label Text="{Binding Name}" FontAttributes="Bold" TextColor="Teal" FontSize="21" />
-                            <Label Grid.Row="1" Text="{Binding TimeSeconds}" TextColor="Teal" FontSize="15"/>
+                            <Label Grid.Row="1" Text="{Binding TimeSeconds}" TextColor="Teal" FontSize="15" />
                         </Grid>
                     </DataTemplate>
                 </syncfusion:SfListView.ItemTemplate>
             </syncfusion:SfListView>
 
-            <Grid>
+            <StackLayout Orientation="Horizontal">
                 <Button Text="Cancel"
                         Command="{Binding CancelCommand}"
                         IsEnabled="{Binding IsBusy, Converter={StaticResource Inverter}}"
-                        Grid.Row="0"
-                        Grid.Column="0" />
+                        HorizontalOptions="FillAndExpand" />
 
                 <Button Text="Save"
                         Command="{Binding AddNewIntervalTemplateCommand}"
                         IsEnabled="{Binding IsBusy, Converter={StaticResource Inverter}}"
-                        Grid.Row="0"
-                        Grid.Column="1" />
-            </Grid>
+                        HorizontalOptions="FillAndExpand" />
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
