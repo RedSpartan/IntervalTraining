@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ResourceDictionary x:Class="RedSpartan.IntervalTraining.UI.Mobile.Shared.Themes.DefaultTheme"
+                    xmlns:sfBtn="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+                    xmlns:gradient ="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms"
                     xmlns="http://xamarin.com/schemas/2014/forms"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
@@ -97,19 +99,29 @@
     </Style>
 
     <!-- Button -->
-    <Style TargetType="Button">
-        <Setter Property="BackgroundColor" Value="{StaticResource Colour-Gray200}" />
+    <Style TargetType="sfBtn:SfButton">
+        <Setter Property="BackgroundColor" Value="{StaticResource Colour-Green}" />
+        <Setter Property="TextColor" Value="{StaticResource Colour-GrayWhite}" />
+        <Setter Property="PressedBackgroundColor" Value="{StaticResource Colour-Red}" />
+        <Setter Property="FontFamily" Value="{StaticResource Font-Regular}" />
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="HeightRequest" Value="40" />
+        <Setter Property="CornerRadius" Value="20" />
+        <Setter Property="HasShadow" Value="True" />
+        <Setter Property="ShadowColor" Value="{StaticResource Colour-GrayWhite}" />
     </Style>
 
     <!-- Entry -->
     <Style TargetType="Entry">
-        <Setter Property="BackgroundColor" Value="{StaticResource Colour-Gray100}" />
-        <Setter Property="PlaceholderColor" Value="{StaticResource Colour-Gray100}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource Colour-PrimaryLight}" />
+        <Setter Property="PlaceholderColor" Value="{StaticResource Colour-Gray600}" />
+        <Setter Property="FontFamily" Value="{StaticResource Font-Regular}" />
+        <Setter Property="TextColor" Value="{StaticResource Colour-GrayWhite}" />
     </Style>
 
     <!-- Common style for content pages -->
     <Style x:Key="PageStyle" TargetType="Page" ApplyToDerivedTypes="True">
-        <Setter Property="BackgroundColor" Value="{StaticResource Colour-Gray200}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource Colour-PrimaryDark}" />
     </Style>
 
     <!-- Common styles for labels -->

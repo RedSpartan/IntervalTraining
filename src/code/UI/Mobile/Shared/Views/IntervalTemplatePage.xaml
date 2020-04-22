@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:sfBtn="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              x:Class="RedSpartan.IntervalTraining.UI.Mobile.Shared.Views.IntervalTemplatePage"
              Style="{StaticResource Key=Page}">
     <ContentPage.Content>
@@ -25,7 +26,8 @@
                    Placeholder="No. Iterations" />
 
             <BoxView HeightRequest="2"
-                     Color="Black" />
+                     Color="{StaticResource Key=Colour-PrimaryLighter}"
+                     Margin="0,12,0,12"/>
 
             <Entry Text="{Binding IntervalName}"
                    Placeholder="Interval Name" />
@@ -34,9 +36,9 @@
                    Placeholder="Interval Time Seconds" />
             
             <StackLayout Orientation="Horizontal">
-                <Button Text="Add Interval"
-                        Command="{Binding AddNewIntervalCommand}"
-                        IsEnabled="{Binding IsBusy, Converter={StaticResource Inverter}}" />
+                <sfBtn:SfButton Text="Add Interval"
+                                Command="{Binding AddNewIntervalCommand}"
+                                IsEnabled="{Binding IsBusy, Converter={StaticResource Inverter}}" />
 
                 <Label Text="{Binding Template.TotalIntervals}"
                        Style="{StaticResource Key=HeadingLabel}" />
@@ -60,15 +62,15 @@
             </syncfusion:SfListView>
 
             <StackLayout Orientation="Horizontal">
-                <Button Text="Cancel"
-                        Command="{Binding CancelCommand}"
-                        IsEnabled="{Binding IsBusy, Converter={StaticResource Inverter}}"
-                        HorizontalOptions="FillAndExpand" />
+                <sfBtn:SfButton Text="Cancel"
+                                Command="{Binding CancelCommand}"
+                                IsEnabled="{Binding IsBusy, Converter={StaticResource Inverter}}"
+                                HorizontalOptions="FillAndExpand" />
 
-                <Button Text="Save"
-                        Command="{Binding AddNewIntervalTemplateCommand}"
-                        IsEnabled="{Binding IsBusy, Converter={StaticResource Inverter}}"
-                        HorizontalOptions="FillAndExpand" />
+                <sfBtn:SfButton Text="Save"
+                                Command="{Binding AddNewIntervalTemplateCommand}"
+                                IsEnabled="{Binding IsBusy, Converter={StaticResource Inverter}}"
+                                HorizontalOptions="FillAndExpand" />
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

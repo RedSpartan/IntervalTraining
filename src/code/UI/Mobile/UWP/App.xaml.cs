@@ -1,4 +1,6 @@
 ﻿using Syncfusion.ListView.XForms.UWP;
+using Syncfusion.XForms.UWP.Border;
+using Syncfusion.XForms.UWP.Buttons;
 using Syncfusion.XForms.UWP.TextInputLayout;
 using System;
 using System.Collections.Generic;
@@ -46,6 +48,8 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.UWP
                 {
                     typeof(SfListViewRenderer).GetTypeInfo().Assembly,
                     typeof(SfTextInputLayoutRenderer).GetTypeInfo().Assembly,
+                    typeof(SfButtonRenderer).GetTypeInfo().Assembly,
+                    typeof(SfBorderRenderer).GetTypeInfo().Assembly,
                 };
 
                 Xamarin.Forms.Forms.Init(e, assembliesToInclude);
