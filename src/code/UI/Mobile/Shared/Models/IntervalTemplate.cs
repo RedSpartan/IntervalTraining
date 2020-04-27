@@ -16,21 +16,37 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.Models
 
         #region Properties
         public int Id { get => _id; set => SetProperty(ref _id, value); }
-        
+
         public string Name { get => _name; set => SetProperty(ref _name, value); }
 
-        public int? TimeSeconds 
-        { 
-            get => _timeSeconds; 
-            set => SetProperty(ref _timeSeconds, value, () => RaisePropertyChanged(nameof(IntervalType))); 
+        public int? TimeSeconds
+        {
+            get => _timeSeconds;
+            set => SetProperty(ref _timeSeconds,
+                value, () =>
+                {
+                    if (value != null && Iterations != null)
+                    {
+                        Iterations = null;
+                    }
+                    RaisePropertyChanged(nameof(IntervalType));
+                });
         }
-        
-        public int? Iterations 
-        { 
-            get => _iterations; 
-            set => SetProperty(ref _iterations, value, () => RaisePropertyChanged(nameof(IntervalType))); 
+
+        public int? Iterations
+        {
+            get => _iterations;
+            set => SetProperty(ref _iterations,
+                value, () =>
+                {
+                    if (value != null && TimeSeconds != null)
+                    {
+                        TimeSeconds = null;
+                    }
+                    RaisePropertyChanged(nameof(IntervalType));
+                });
         }
-        
+
         public bool InMotion { get => _inMotion; set => SetProperty(ref _inMotion, value); }
 
         public bool IsNew => Id == 0;
@@ -45,6 +61,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.Models
         public ObservableCollection<History> History { get; }
         #endregion Collections
 
+        #region Constructors
         public IntervalTemplate()
         {
             Intervals = new ObservableCollection<Interval>();
@@ -53,12 +70,22 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.Models
             History = new ObservableCollection<History>();
             History.CollectionChanged += History_CollectionChanged;
         }
+        #endregion Constructors
 
+        #region Public Methods
+        public void Dispose()
+        {
+            Intervals.CollectionChanged -= Intervals_CollectionChanged;
+            History.CollectionChanged -= History_CollectionChanged;
+        }
+        #endregion Public Methods
+
+        #region Private Methods
         private string GetIntervalType()
         {
             if (TimeSeconds == null && Iterations == null)
             {
-                return "∞"; 
+                return "∞";
             }
 
             if (Iterations != null)
@@ -93,11 +120,6 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.Models
                     break;
             }
         }
-
-        public void Dispose()
-        {
-            Intervals.CollectionChanged -= Intervals_CollectionChanged;
-            History.CollectionChanged -= History_CollectionChanged;
-        }
+        #endregion Private Methods
     }
 }

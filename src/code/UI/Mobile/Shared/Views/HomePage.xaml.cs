@@ -1,5 +1,4 @@
 ﻿using RedSpartan.IntervalTraining.UI.Mobile.Shared.Models;
-using RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels;
 using Syncfusion.ListView.XForms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;

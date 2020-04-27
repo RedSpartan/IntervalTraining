@@ -98,19 +98,53 @@
         <Setter Property="HasShadow" Value="True" />
     </Style>
 
-    <!-- Button -->
+    <!-- Common styles Button -->
     <Style TargetType="sfBtn:SfButton">
-        <Setter Property="BackgroundColor" Value="{StaticResource Colour-Green}" />
-        <Setter Property="TextColor" Value="{StaticResource Colour-GrayWhite}" />
-        <Setter Property="PressedBackgroundColor" Value="{StaticResource Colour-Red}" />
         <Setter Property="FontFamily" Value="{StaticResource Font-Regular}" />
         <Setter Property="Padding" Value="10" />
         <Setter Property="HeightRequest" Value="40" />
         <Setter Property="CornerRadius" Value="20" />
-        <Setter Property="HasShadow" Value="True" />
-        <Setter Property="ShadowColor" Value="{StaticResource Colour-GrayWhite}" />
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup>
+                    
+                    <VisualState x:Name="Normal">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="{StaticResource Colour-Green}" />
+                            <Setter Property="BorderColor" Value="{StaticResource Colour-GrayWhite}" />
+                            <Setter Property="TextColor" Value="{StaticResource Colour-GrayWhite}" />
+                        </VisualState.Setters>
+                    </VisualState>
+
+                    <VisualState x:Name="Pressed">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="{StaticResource Colour-Blue}" />
+                            <Setter Property="BorderColor" Value="{StaticResource Colour-GrayWhite}" />
+                            <Setter Property="TextColor" Value="{StaticResource Colour-Gray700}" />
+                        </VisualState.Setters>
+                    </VisualState>
+
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="{StaticResource Colour-Red}" />
+                            <Setter Property="BorderColor" Value="{StaticResource Colour-GrayBlack}" />
+                            <Setter Property="TextColor" Value="{StaticResource Colour-GrayWhite}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
     </Style>
 
+    <Style TargetType="sfBtn:SfSegmentedControl">
+        <Setter Property="BackgroundColor" Value="{StaticResource Colour-PrimaryLight}" />
+        <Setter Property="BorderColor" Value="{StaticResource Colour-Green}" />
+        <Setter Property="Color" Value="{StaticResource Colour-Transparent}" />
+        <Setter Property="FontFamily" Value="{StaticResource Font-Regular}" />
+        <Setter Property="FontColor" Value="{StaticResource Colour-GrayWhite}" />
+    </Style>
+    
     <!-- Entry -->
     <Style TargetType="Entry">
         <Setter Property="BackgroundColor" Value="{StaticResource Colour-PrimaryLight}" />

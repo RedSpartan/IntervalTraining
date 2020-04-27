@@ -7,7 +7,9 @@
              xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              xmlns:sfBtn="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              x:Class="RedSpartan.IntervalTraining.UI.Mobile.Shared.Views.IntervalTemplatePage"
-             Style="{StaticResource Key=Page}">
+             xmlns:sys="clr-namespace:System.Collections.Generic;assembly=netstandard"
+             Style="{StaticResource Key=Page}"
+             x:Name="This">
     <ContentPage.Content>
         <StackLayout Padding="10">
 
@@ -18,12 +20,30 @@
             <Label Text="{Binding Template.Name}"
                    IsVisible="{Binding Template.IsNew, Converter={StaticResource Key=Inverter}}"
                    Style="{StaticResource Key=HeadingLabel}" />
-            
+
+            <sfBtn:SfSegmentedControl VisibleSegmentsCount="3"
+                                      FontSize="26"
+                                      SelectedIndex="{Binding SelectedIndex}">
+                <sfBtn:SfSegmentedControl.SelectionIndicatorSettings>
+                    <sfBtn:SelectionIndicatorSettings Color="{StaticResource Colour-Green}" Position="Fill" />
+                </sfBtn:SfSegmentedControl.SelectionIndicatorSettings>
+                <sys:List x:TypeArguments="x:String">
+                    <x:String>∞</x:String>
+                    <x:String>#</x:String>
+                    <x:String>mm:ss</x:String>
+                </sys:List>
+            </sfBtn:SfSegmentedControl>
+
             <Entry Text="{Binding Template.TimeSeconds}"
-                   Placeholder="Time Seconds" />
+                   Placeholder="Time Seconds"
+                   IsVisible="{Binding SelectedIndex, Converter={StaticResource Key=BooleanInt}, ConverterParameter=2}" />
 
             <Entry Text="{Binding Template.Iterations}"
-                   Placeholder="No. Iterations" />
+                   Placeholder="No. Iterations"
+                   IsVisible="{Binding SelectedIndex, Converter={StaticResource Key=BooleanInt}, ConverterParameter=1}" />
+
+            <Label Text="Continious Iterations"
+                   IsVisible="{Binding SelectedIndex, Converter={StaticResource Key=BooleanInt}, ConverterParameter=0}" />
 
             <BoxView HeightRequest="2"
                      Color="{StaticResource Key=Colour-PrimaryLighter}"
@@ -32,31 +52,75 @@
             <Entry Text="{Binding IntervalName}"
                    Placeholder="Interval Name" />
 
-            <Entry Text="{Binding IntervalTimeSeconds}"
-                   Placeholder="Interval Time Seconds" />
-            
-            <StackLayout Orientation="Horizontal">
+            <Entry Text="{Binding IntervalTimeSeconds, Mode=TwoWay, Converter={StaticResource Key=NullableInt}}" 
+                   Placeholder="Interval Time Seconds" 
+                   Keyboard="Numeric" />
+
+            <StackLayout Orientation="Horizontal"
+                         Margin="0,20,0,0">
                 <sfBtn:SfButton Text="Add Interval"
-                                Command="{Binding AddNewIntervalCommand}"
-                                IsEnabled="{Binding IsBusy, Converter={StaticResource Inverter}}" />
+                                Command="{Binding AddIntervalCommand}"
+                                IsEnabled="{Binding IsBusy, Converter={StaticResource Key=Inverter}}" />
 
                 <Label Text="{Binding Template.TotalIntervals}"
-                       Style="{StaticResource Key=HeadingLabel}" />
+                       Style="{StaticResource Key=HeadingLabel}"
+                       Margin="20,0,0,0"
+                       VerticalOptions="CenterAndExpand" />
             </StackLayout>
-            
+
             <syncfusion:SfListView ItemsSource="{Binding Template.Intervals}"
-                                   ItemSize="100"
-                                   VerticalOptions="StartAndExpand">
+                                   AutoFitMode="Height"
+                                   Grid.Row="1"
+                                   SelectedItem="{Binding SelectedItem}"
+                                   VerticalOptions="StartAndExpand"
+                                   DragStartMode="OnDragIndicator"
+                                   ItemDragging="listView_ItemDragging"
+                                   x:Name="listView">
                 <syncfusion:SfListView.ItemTemplate>
                     <DataTemplate>
-                        <Grid Padding="10">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="0.4*" />
-                                <RowDefinition Height="0.6*" />
-                            </Grid.RowDefinitions>
-                            <Label Text="{Binding Name}" FontAttributes="Bold" TextColor="Teal" FontSize="21" />
-                            <Label Grid.Row="1" Text="{Binding TimeSeconds}" TextColor="Teal" FontSize="15" />
-                        </Grid>
+                        <Frame Style="{StaticResource Key=ListItem}"
+                               BackgroundColor="{Binding InMotion, Converter={StaticResource Key=BoolTransparency}, ConverterParameter={StaticResource Key=Colour-Primary}}"
+                               BorderColor="{StaticResource Key=Colour-PrimaryLighter}"
+                               Padding="10"
+                               Margin="5">
+                            <StackLayout Padding="5"
+                                         Orientation="Horizontal">
+
+                                <Image Source="delete.png"
+                                       HeightRequest="30"
+                                       Grid.RowSpan="2">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding BindingContext.DeleteTemplateCommand, Source={Reference This}}"
+                                                              CommandParameter="{Binding .}" />
+                                    </Image.GestureRecognizers>
+                                </Image>
+
+                                <Grid HorizontalOptions="StartAndExpand">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="0.4*" />
+                                        <RowDefinition Height="0.6*" />
+                                    </Grid.RowDefinitions>
+
+                                    <Label Text="{Binding Name}" 
+                                           FontAttributes="Bold" 
+                                           TextColor="{StaticResource Key=Colour-GrayWhite}" 
+                                           FontSize="21"/>
+
+                                    <Label Text="{Binding Time, Converter={StaticResource Key=TimespanToString}}" 
+                                           TextColor="{StaticResource Key=Colour-GrayWhite}" 
+                                           FontSize="15"
+                                           Grid.Row="1" />
+                                </Grid>
+                                <syncfusion:DragIndicatorView Grid.Column="2" 
+                                                              ListView="{x:Reference listView}" 
+                                                              HorizontalOptions="Center" 
+                                                              VerticalOptions="Center">
+                                    <Image Source="order.png" 
+                                           WidthRequest="30"
+                                           HorizontalOptions="End" />
+                                </syncfusion:DragIndicatorView>
+                            </StackLayout>
+                        </Frame>
                     </DataTemplate>
                 </syncfusion:SfListView.ItemTemplate>
             </syncfusion:SfListView>
@@ -64,12 +128,12 @@
             <StackLayout Orientation="Horizontal">
                 <sfBtn:SfButton Text="Cancel"
                                 Command="{Binding CancelCommand}"
-                                IsEnabled="{Binding IsBusy, Converter={StaticResource Inverter}}"
+                                IsEnabled="{Binding IsBusy, Converter={StaticResource Key=Inverter}}"
                                 HorizontalOptions="FillAndExpand" />
 
                 <sfBtn:SfButton Text="Save"
-                                Command="{Binding AddNewIntervalTemplateCommand}"
-                                IsEnabled="{Binding IsBusy, Converter={StaticResource Inverter}}"
+                                Command="{Binding SaveCommand}"
+                                IsEnabled="{Binding IsBusy, Converter={StaticResource Key=Inverter}}"
                                 HorizontalOptions="FillAndExpand" />
             </StackLayout>
         </StackLayout>

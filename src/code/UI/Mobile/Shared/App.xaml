@@ -12,7 +12,17 @@
 
         <ioc:ContainerProvider x:TypeArguments="converter:BooleanInverterConverter"
                                x:Key="Inverter" />
+        
         <ioc:ContainerProvider x:TypeArguments="converter:BooleanToTransparencyConverter"
                                x:Key="BoolTransparency" />
-	</Application.Resources>
+        
+        <ioc:ContainerProvider x:TypeArguments="converter:NullableIntConverter"
+                               x:Key="NullableInt" />
+        
+        <ioc:ContainerProvider x:TypeArguments="converter:TimespanToStringConverter"
+                               x:Key="TimespanToString" />
+        
+        <ioc:ContainerProvider x:TypeArguments="converter:BooleanIntConverter"
+                               x:Key="BooleanInt" />
+    </Application.Resources>
 </prism:PrismApplication>

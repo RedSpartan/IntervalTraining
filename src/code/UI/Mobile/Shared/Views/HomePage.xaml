@@ -18,8 +18,8 @@
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="3*"/>
-                <RowDefinition Height="7*"/>
+                <RowDefinition Height="3*" />
+                <RowDefinition Height="7*" />
             </Grid.RowDefinitions>
 
             <Image Source="logo_lf.png"
@@ -27,7 +27,6 @@
 
             <syncfusion:SfListView ItemsSource="{Binding IntervalTemplates}"
                                    AutoFitMode="Height"
-                                   AllowSwiping="True"
                                    Grid.Row="1"
                                    SelectedItem="{Binding SelectedItem}"
                                    DragStartMode="OnDragIndicator"
@@ -44,7 +43,7 @@
                     <DataTemplate>
                         <Frame Style="{StaticResource Key=ListItem}"
                                BackgroundColor="{Binding InMotion, Converter={StaticResource Key=BoolTransparency}, ConverterParameter={StaticResource Key=Colour-Primary}}"
-                               BorderColor="{StaticResource Key=Colour-Primary}"
+                               BorderColor="{StaticResource Key=Colour-PrimaryLighter}"
                                Padding="10"
                                Margin="5">
                             <StackLayout Padding="5"

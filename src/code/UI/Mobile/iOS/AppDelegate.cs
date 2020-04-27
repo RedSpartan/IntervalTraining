@@ -31,6 +31,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.iOS
             SfEffectsViewRenderer.Init();
             SfBorderRenderer.Init();
             SfButtonRenderer.Init();
+            SfSegmentedControlRenderer.Init();
             LoadApplication(new App(new iOSInitializer()));
 
             return base.FinishedLaunching(app, options);

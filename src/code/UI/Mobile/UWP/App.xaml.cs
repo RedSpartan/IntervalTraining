@@ -50,6 +50,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.UWP
                     typeof(SfTextInputLayoutRenderer).GetTypeInfo().Assembly,
                     typeof(SfButtonRenderer).GetTypeInfo().Assembly,
                     typeof(SfBorderRenderer).GetTypeInfo().Assembly,
+                    typeof(SfSegmentedControlRenderer).GetTypeInfo().Assembly,
                 };
 
                 Xamarin.Forms.Forms.Init(e, assembliesToInclude);

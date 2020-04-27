@@ -39,8 +39,8 @@ namespace RedSpartan.IntervalTraining.Repository.Services
             using (var context = _contextFactory.GetContext())
             {
                 var oldItem = await context.Intervals.Where(x => x.Id == item.Id).FirstOrDefaultAsync();
-                context.Intervals.Remove(oldItem);
-                context.Intervals.Add(_mapper.Map<IntervalTemplate>(item));
+                
+                _mapper.Map<IntervalTemplate>(item).CopyTo(oldItem);
 
                 await context.SaveChangesAsync();
 

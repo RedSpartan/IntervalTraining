@@ -17,9 +17,14 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
         private int? _intervalTimeSeconds;
         private IntervalTemplate _template;
         private bool _isBusy;
+        private int _selectedIndex = 0;
         #endregion Fields
 
         #region Properties
+        private IntervalTemplate InitialState { get; set; }
+
+        public int SelectedIndex { get => _selectedIndex; set => SetProperty(ref _selectedIndex, value); }
+
         public IntervalTemplate Template
         {
             get => _template;
@@ -50,11 +55,13 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
         #endregion Services
 
         #region Commands
-        public ICommand AddNewIntervalTemplateCommand { get; }
-        public ICommand AddNewIntervalCommand { get; }
+        public ICommand SaveCommand { get; }
+        public ICommand AddIntervalCommand { get; }
         public ICommand CancelCommand { get; }
+        public ICommand DeleteTemplateCommand { get; }
         #endregion Commands
 
+        #region Constructors
         public IntervalTemplateViewModel(INavigationService navigationService,
             IEventAggregator eventAggregator)
             : base(navigationService)
@@ -64,40 +71,21 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
             IntervalTemplateEvent = eventAggregator?.GetEvent<IntervalTemplateEvent>()
                 ?? throw new ArgumentNullException(nameof(eventAggregator));
 
-            AddNewIntervalTemplateCommand = new DelegateCommand(async () => await AddNewIntervalTemplate());
-            AddNewIntervalCommand = new DelegateCommand(async () => await AddNewInterval());
-            CancelCommand = new DelegateCommand(async () => await NavigationService.GoBackAsync());
-        }
+            SaveCommand = new DelegateCommand(async () => await Save(), CanSave)
+                .ObservesProperty(() => Template.TotalIntervals)
+                .ObservesProperty(() => Template.Name);
 
-        #region Methods
-        private async Task AddNewIntervalTemplate()
-        {
-            IsBusy = true;
-            IntervalTemplateEvent.Publish(Template);
-            await NavigationService.GoBackAsync();
-            IsBusy = false;
-        }
+            AddIntervalCommand = new DelegateCommand(async () => await AddInterval(), CanAddInterval)
+                .ObservesProperty(() => IntervalName)
+                .ObservesProperty(() => IntervalTimeSeconds);
 
-        private Task AddNewInterval()
-        {
-            return Task.Run(() =>
-            {
-                IsBusy = true;
-                var interval = new Interval 
-                { 
-                    Name = IntervalName, 
-                    Time = TimeSpan.FromSeconds((int)IntervalTimeSeconds),
-                    Order = Template.Intervals.Count
-                };
-                
-                Device.BeginInvokeOnMainThread(() => Template.Intervals.Add(interval));
-                
-                IntervalName = null;
-                IntervalTimeSeconds = null;
-                IsBusy = false;
-            });
-        }
+            CancelCommand = new DelegateCommand(async () => await Cancel());
 
+            DeleteTemplateCommand = new DelegateCommand<Interval>(DeleteIntervalFromIntervals);
+        }
+        #endregion Constructors
+
+        #region Public Methods
         public override void Initialize(INavigationParameters parameters)
         {
             if (!parameters.ContainsKey(nameof(IntervalTemplate)))
@@ -106,8 +94,69 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
             }
 
             Template = parameters.GetValue<IntervalTemplate>(nameof(IntervalTemplate));
+            InitialState = Template.Clone();
+            foreach (var interval in Template.Intervals)
+            {
+                InitialState.Intervals.Add(interval);
+            }
             base.Initialize(parameters);
         }
-        #endregion Methods
+        #endregion Public Methods
+
+        #region Private Methods
+        private async Task Save()
+        {
+            IsBusy = true;
+            IntervalTemplateEvent.Publish(Template);
+            await NavigationService.GoBackAsync();
+            IsBusy = false;
+        }
+
+        private bool CanSave()
+        {
+            return Template?.TotalIntervals > 0 && !string.IsNullOrEmpty(Template?.Name);
+        }
+
+        private void DeleteIntervalFromIntervals(Interval item)
+        {
+            Template.Intervals.Remove(item);
+        }
+
+        private Task AddInterval()
+        {
+            return Task.Run(() =>
+            {
+                IsBusy = true;
+                var interval = new Interval
+                {
+                    Name = IntervalName,
+                    Time = TimeSpan.FromSeconds((int)IntervalTimeSeconds),
+                    Order = Template.Intervals.Count
+                };
+
+                Device.BeginInvokeOnMainThread(() => Template.Intervals.Add(interval));
+
+                IntervalName = null;
+                IntervalTimeSeconds = null;
+                IsBusy = false;
+            });
+        }
+
+        private bool CanAddInterval()
+        {
+            return !string.IsNullOrWhiteSpace(IntervalName) && IntervalTimeSeconds != null;
+        }
+
+        private async Task Cancel()
+        {
+            InitialState.CopyTo(Template);
+            Template.Intervals.Clear();
+            foreach (var interval in InitialState.Intervals)
+            {
+                Template.Intervals.Add(interval);
+            }
+            await NavigationService.GoBackAsync();
+        }
+        #endregion Private Methods
     }
 }
