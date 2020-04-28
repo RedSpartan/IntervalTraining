@@ -5,39 +5,64 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
-             x:Class="RedSpartan.IntervalTraining.UI.Mobile.Shared.Views.TimerPage">
+             xmlns:sfBtn="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             x:Class="RedSpartan.IntervalTraining.UI.Mobile.Shared.Views.TimerPage"
+             Style="{StaticResource Key=Page}">
     <ContentPage.Content>
-        <StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height=".5*" />
+                <RowDefinition Height=".5*" />
+            </Grid.RowDefinitions>
             
-            <Label Text="{Binding TimeRemaining}" />
-            
-            <Grid>
-                <Button Text="Start"
-                        Grid.Column="0"
-                        Command="{Binding StartCommand}" />
-                <Button Text="{Binding FinaliseButtonLabel}"
-                        Grid.Column="1"
-                        Command="{Binding FinaliseCommand}" />
-            </Grid>
+            <Label Text="{Binding TimeRemaining}"
+                   FontSize="50"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="CenterAndExpand" />
 
-            <syncfusion:SfListView ItemsSource="{Binding Queue}"
-                                   ItemSize="100"
-                                   Grid.Row="7"
-                                   Grid.ColumnSpan="2">
-                <syncfusion:SfListView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Padding="10">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="0.4*" />
-                                <RowDefinition Height="0.6*" />
-                            </Grid.RowDefinitions>
-                            <Label Text="{Binding Name}"/>
-                            <Label Grid.Row="1" Text="{Binding TimeSeconds}"/>
-                        </Grid>
-                    </DataTemplate>
-                </syncfusion:SfListView.ItemTemplate>
-            </syncfusion:SfListView>
-            
-        </StackLayout>
+            <StackLayout VerticalOptions="CenterAndExpand"                   
+                         HorizontalOptions="CenterAndExpand"
+                         Grid.Row="1">
+                <StackLayout Orientation="Horizontal">
+                    <sfBtn:SfButton Text="Start"
+                                    Command="{Binding StartCommand}"
+                                    HorizontalOptions="FillAndExpand"/>
+                    
+                    <sfBtn:SfButton Text="{Binding FinaliseButtonLabel}"
+                                    Command="{Binding FinaliseCommand}"
+                                    HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+
+                <syncfusion:SfListView ItemsSource="{Binding Queue}"
+                                       AutoFitMode="Height"
+                                       Grid.Row="2"
+                                       Grid.ColumnSpan="2">
+                    <syncfusion:SfListView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Style="{StaticResource Key=ListItem}"
+                                   BackgroundColor="{Binding InMotion, Converter={StaticResource Key=BoolTransparency}, ConverterParameter={StaticResource Key=Colour-Primary}}"
+                                   BorderColor="{StaticResource Key=Colour-PrimaryLighter}"
+                                   Padding="10"
+                                   Margin="5">
+                                <Grid Padding="0">
+
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="0.4*" />
+                                        <RowDefinition Height="0.6*" />
+                                    </Grid.RowDefinitions>
+
+                                    <Label Text="{Binding Name}"
+                                           Padding="0" />
+
+                                    <Label Text="{Binding Time, Converter={StaticResource Key=TimespanToString}}"
+                                           Padding="0"
+                                           Grid.Row="1" />
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </syncfusion:SfListView.ItemTemplate>
+                </syncfusion:SfListView>
+            </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

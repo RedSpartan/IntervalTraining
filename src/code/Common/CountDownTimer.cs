@@ -30,7 +30,7 @@ namespace RedSpartan.IntervalTraining.Common
 
         public string TimeLeftStr => TimeLeft.ToString("mm:ss");
 
-        public string TimeLeftMsStr => TimeLeft.ToString("mm:ss.fff");
+        public string TimeLeftMsStr => TimeLeft.ToString("mm:ss.f");
         #endregion Properties
 
         #region Constructors

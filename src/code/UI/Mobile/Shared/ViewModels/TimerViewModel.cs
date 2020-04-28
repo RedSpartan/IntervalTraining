@@ -15,7 +15,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
         #region Fields
         private IntervalTemplate _intervalTemplate;
         private CountDownTimer _timer = new CountDownTimer();
-        private string _timeRemaining = "00:00.000";
+        private string _timeRemaining = "00:00.0";
         private bool _started = false;
         private bool _finished = false;
         private string _finaliseButtonLabel = "Close";
@@ -86,7 +86,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
 
             SetupTimer();
 
-            Timer.TimeChanged += () => TimeRemaining = Timer.TimeLeftStr;
+            Timer.TimeChanged += () => TimeRemaining = Timer.TimeLeftMsStr;
 
             Timer.CountDownFinished += () => OnCountDownFinish();
 
@@ -164,7 +164,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
             var timespan = Queue.Peek().Time;
             Timer.SetTime(timespan.Minutes, timespan.Seconds);
 
-            TimeRemaining = Timer.TimeLeftStr;
+            TimeRemaining = Timer.TimeLeftMsStr;
 
             if (_started)
             {
