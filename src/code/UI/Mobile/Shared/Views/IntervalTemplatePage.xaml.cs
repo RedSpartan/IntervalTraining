@@ -11,7 +11,9 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.Views
         public IntervalTemplatePage()
         {
             InitializeComponent();
+            listView.DragDropController.UpdateSource = true;
         }
+
         private void listView_ItemDragging(object sender, ItemDraggingEventArgs e)
         {
             switch (e.Action)

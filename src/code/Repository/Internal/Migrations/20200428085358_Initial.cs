@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace RedSpartan.IntervalTraining.Repository.Internal.Migrations
 {
-    public partial class InitialBuild : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

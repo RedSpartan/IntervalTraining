@@ -1,6 +1,8 @@
 ﻿using Prism.Mvvm;
+using Syncfusion.DataSource.Extensions;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.Models
 {
@@ -50,8 +52,11 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.Models
         public bool InMotion { get => _inMotion; set => SetProperty(ref _inMotion, value); }
 
         public bool IsNew => Id == 0;
+
         public int TotalIntervals => Intervals.Count;
+
         public int Usage => History.Count;
+
         public string IntervalType => GetIntervalType();
         #endregion Properties
 

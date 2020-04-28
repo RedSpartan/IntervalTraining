@@ -9,8 +9,8 @@ using RedSpartan.IntervalTraining.Internal.Repository.Access;
 namespace RedSpartan.IntervalTraining.Repository.Internal.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200413095209_InitialBuild")]
-    partial class InitialBuild
+    [Migration("20200428085358_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
