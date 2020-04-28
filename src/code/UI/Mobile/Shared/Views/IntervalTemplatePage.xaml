@@ -71,7 +71,7 @@
 
             <syncfusion:SfListView ItemsSource="{Binding Template.Intervals}"
                                    AutoFitMode="Height"
-                                   SelectedItem="{Binding SelectedItem}"
+                                   SelectionMode="None"
                                    VerticalOptions="StartAndExpand"
                                    DragStartMode="OnDragIndicator"
                                    ItemDragging="listView_ItemDragging"
@@ -83,13 +83,14 @@
                         <Frame Style="{StaticResource Key=ListItem}"
                                BackgroundColor="{Binding InMotion, Converter={StaticResource Key=BoolTransparency}, ConverterParameter={StaticResource Key=Colour-Primary}}"
                                BorderColor="{StaticResource Key=Colour-PrimaryLighter}"
-                               Padding="10"
+                               Padding="0"
                                Margin="5">
                             <StackLayout Padding="5"
                                          Orientation="Horizontal">
 
                                 <Image Source="delete.png"
                                        HeightRequest="30"
+                                       Margin="0"
                                        Grid.RowSpan="2">
                                     <Image.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding BindingContext.DeleteTemplateCommand, Source={Reference This}}"
@@ -97,7 +98,10 @@
                                     </Image.GestureRecognizers>
                                 </Image>
 
-                                <Grid HorizontalOptions="StartAndExpand">
+                                <Grid HorizontalOptions="StartAndExpand"
+                                      Padding="0"
+                                      Margin="0">
+                                    
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="0.4*" />
                                         <RowDefinition Height="0.6*" />
@@ -106,19 +110,26 @@
                                     <Label Text="{Binding Name}" 
                                            FontAttributes="Bold" 
                                            TextColor="{StaticResource Key=Colour-GrayWhite}" 
+                                           Padding="0"
+                                           Margin="0"
                                            FontSize="21"/>
 
                                     <Label Text="{Binding Time, Converter={StaticResource Key=TimespanToString}}" 
-                                           TextColor="{StaticResource Key=Colour-GrayWhite}" 
+                                           TextColor="{StaticResource Key=Colour-GrayWhite}"
+                                           Padding="0"
+                                           Margin="0"
                                            FontSize="15"
                                            Grid.Row="1" />
                                 </Grid>
-                                <syncfusion:DragIndicatorView Grid.Column="2" 
-                                                              ListView="{x:Reference listView}" 
+                                <syncfusion:DragIndicatorView ListView="{x:Reference listView}"
+                                                              Padding="0"
+                                                              Margin="0"
                                                               HorizontalOptions="Center" 
-                                                              VerticalOptions="Center">
+                                                              VerticalOptions="Center"
+                                                              Grid.Column="2">
                                     <Image Source="order.png" 
                                            WidthRequest="30"
+                                           Margin="0"
                                            HorizontalOptions="End" />
                                 </syncfusion:DragIndicatorView>
                             </StackLayout>

@@ -3,10 +3,8 @@ using Prism.Events;
 using Prism.Navigation;
 using RedSpartan.IntervalTraining.UI.Mobile.Shared.Events;
 using RedSpartan.IntervalTraining.UI.Mobile.Shared.Models;
-using Syncfusion.DataSource.Extensions;
 using System;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -20,7 +18,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
         private int? _intervalTimeSeconds;
         private IntervalTemplate _template;
         private bool _isBusy;
-        private int _selectedIndex = 0;
+        private int _selectedIndex;
         #endregion Fields
 
         #region Properties
@@ -52,10 +50,6 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
             set => SetProperty(ref _isBusy, value);
         }
         #endregion Properties
-
-        #region Collections
-        public ObservableCollection<Interval> Intervals { get; } = new ObservableCollection<Interval>();
-        #endregion Collections
 
         #region Services
         private IntervalTemplateEvent IntervalTemplateEvent { get; }
@@ -114,12 +108,6 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
         private async Task Save()
         {
             IsBusy = true;
-            /*Template.Intervals.Clear();
-
-            foreach (var interval in Intervals.OrderBy(x => x.Order))
-            {
-                Template.Intervals.Add(interval);
-            }*/
 
             IntervalTemplateEvent.Publish(Template);
             await NavigationService.GoBackAsync();
