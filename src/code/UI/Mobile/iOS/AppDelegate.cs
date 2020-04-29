@@ -3,6 +3,7 @@ using Prism;
 using Prism.Ioc;
 using RedSpartan.IntervalTraining.UI.Mobile.Shared;
 using Syncfusion.ListView.XForms.iOS;
+using Syncfusion.SfGauge.XForms.iOS;
 using Syncfusion.XForms.iOS.Border;
 using Syncfusion.XForms.iOS.Buttons;
 using Syncfusion.XForms.iOS.EffectsView;
@@ -32,6 +33,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.iOS
             SfBorderRenderer.Init();
             SfButtonRenderer.Init();
             SfSegmentedControlRenderer.Init();
+            SfGaugeRenderer.Init();
             LoadApplication(new App(new iOSInitializer()));
 
             return base.FinishedLaunching(app, options);

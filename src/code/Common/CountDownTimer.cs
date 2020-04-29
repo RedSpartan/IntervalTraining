@@ -31,13 +31,14 @@ namespace RedSpartan.IntervalTraining.Common
         public string TimeLeftStr => TimeLeft.ToString("mm:ss");
 
         public string TimeLeftMsStr => TimeLeft.ToString("mm:ss.f");
+
+        public double PercentageComplete => (TimeLeftMs / (_maxTime.Ticks / (double)TimeSpan.TicksPerMillisecond)) * 100;
         #endregion Properties
 
         #region Constructors
-        public CountDownTimer(int min, int sec) : this()
-        {
-            SetTime(min, sec);
-        }
+        public CountDownTimer(int min, int sec) 
+            : this(new DateTime(1, 1, 1, 0, min, sec))
+        { }
 
         public CountDownTimer(DateTime dt) : this()
         {
@@ -81,8 +82,6 @@ namespace RedSpartan.IntervalTraining.Common
             TimeLeft = _maxTime = dt;
             TimeChanged?.Invoke();
         }
-
-        public void SetTime(int min, int sec = 0) => SetTime(new DateTime(1, 1, 1, 0, min, sec));
 
         public void Start() => _timer.Start();
 

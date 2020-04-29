@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="18.1.0.42" />
+    <PackageReference Include="Syncfusion.Xamarin.SfGauge" Version="18.1.0.42" />
     <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="18.1.0.42" />
     <PackageReference Include="Xamarin.Forms" Version="4.5.0.530" />
     <PackageReference Include="Prism.DryIoc.Forms" Version="7.2.0.1422" />

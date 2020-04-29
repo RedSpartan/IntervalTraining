@@ -10,7 +10,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.UWP
         {
             this.InitializeComponent();
             SfListViewRenderer.Init();
-            LoadApplication(new RedSpartan.IntervalTraining.UI.Mobile.Shared.App(new UwpInitializer()));
+            LoadApplication(new Shared.App(new UwpInitializer()));
         }
     }
 

@@ -19,6 +19,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
         private bool _started = false;
         private bool _finished = false;
         private string _finaliseButtonLabel = "Close";
+        private double _percentageComplete;
         private readonly History _history = new History();
         private readonly Stack<Interval> _compleatedIntervals = new Stack<Interval>();
         #endregion  Fields
@@ -42,7 +43,13 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
             set => SetProperty(ref _timeRemaining, value);
         }
 
-        public string FinaliseButtonLabel 
+        public double PercentageComplete 
+        { 
+            get => _percentageComplete; 
+            set => SetProperty(ref _percentageComplete, value); 
+        }
+
+        public string FinaliseButtonLabel
         {
             get => _finaliseButtonLabel;
             set => SetProperty(ref _finaliseButtonLabel, value);
@@ -86,7 +93,11 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
 
             SetupTimer();
 
-            Timer.TimeChanged += () => TimeRemaining = Timer.TimeLeftMsStr;
+            Timer.TimeChanged += () =>
+            {
+                TimeRemaining = Timer.TimeLeftMsStr;
+                PercentageComplete = Timer.PercentageComplete;
+            };
 
             Timer.CountDownFinished += () => OnCountDownFinish();
 
@@ -156,15 +167,15 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
                     await NavigationService.GoBackAsync();
                     break;
             }
-            
         }
 
         private void SetupTimer()
         {
             var timespan = Queue.Peek().Time;
-            Timer.SetTime(timespan.Minutes, timespan.Seconds);
+            Timer.SetTime(new DateTime(1, 1, 1, 0, timespan.Minutes, timespan.Seconds));
 
             TimeRemaining = Timer.TimeLeftMsStr;
+            PercentageComplete = 100;
 
             if (_started)
             {

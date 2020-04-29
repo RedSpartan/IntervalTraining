@@ -1,4 +1,5 @@
 ﻿using Syncfusion.ListView.XForms.UWP;
+using Syncfusion.SfGauge.XForms.UWP;
 using Syncfusion.XForms.UWP.Border;
 using Syncfusion.XForms.UWP.Buttons;
 using Syncfusion.XForms.UWP.TextInputLayout;
@@ -51,6 +52,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.UWP
                     typeof(SfButtonRenderer).GetTypeInfo().Assembly,
                     typeof(SfBorderRenderer).GetTypeInfo().Assembly,
                     typeof(SfSegmentedControlRenderer).GetTypeInfo().Assembly,
+                    typeof(SfGaugeRenderer).GetTypeInfo().Assembly,
                 };
 
                 Xamarin.Forms.Forms.Init(e, assembliesToInclude);

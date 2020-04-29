@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:gauge="clr-namespace:Syncfusion.SfGauge.XForms;assembly=Syncfusion.SfGauge.XForms"
              xmlns:sfBtn="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              x:Class="RedSpartan.IntervalTraining.UI.Mobile.Shared.Views.TimerPage"
              Style="{StaticResource Key=Page}">
@@ -14,11 +15,35 @@
                 <RowDefinition Height=".5*" />
                 <RowDefinition Height=".5*" />
             </Grid.RowDefinitions>
-            
+
+            <gauge:SfCircularGauge Margin="20">
+                <gauge:SfCircularGauge.Scales>
+                    <gauge:Scale ShowLabels="False"
+                                 ShowTicks="False"
+                                 RimThickness="20"
+                                 RadiusFactor="1"
+                                 RimColor="{StaticResource Key=Colour-Blue}"
+                                 StartAngle="0"
+                                 SweepAngle="360"
+                                 StartValue="0"
+                                 EndValue="100"
+                                 Interval="1">
+                        <gauge:Scale.Pointers>
+                            <gauge:RangePointer Value="{Binding PercentageComplete}"
+                                                Offset="1"
+                                                Thickness="20"
+                                                RangeCap="None"
+                                                AnimationDuration=".1"
+                                                Color="{StaticResource Key=Colour-Red}" />
+                        </gauge:Scale.Pointers>
+                    </gauge:Scale>
+                </gauge:SfCircularGauge.Scales>
+            </gauge:SfCircularGauge>
+
             <Label Text="{Binding TimeRemaining}"
-                   FontSize="50"
-                   VerticalOptions="CenterAndExpand"
-                   HorizontalOptions="CenterAndExpand" />
+                                   FontSize="50"
+                                   VerticalOptions="CenterAndExpand"
+                                   HorizontalOptions="CenterAndExpand" />
 
             <StackLayout VerticalOptions="CenterAndExpand"                   
                          HorizontalOptions="CenterAndExpand"
