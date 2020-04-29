@@ -20,9 +20,10 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
         private bool _started = false;
         private bool _finished = false;
         private string _finaliseButtonLabel = "Close";
-        private double _percentageComplete;
+        private double _percentageComplete = 100;
         private Color _evenColour;
         private Color _oddColour;
+        private bool _clockwise;
         private readonly History _history = new History();
         private readonly Stack<Interval> _compleatedIntervals = new Stack<Interval>();
         #endregion  Fields
@@ -49,7 +50,15 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
         public double PercentageComplete
         {
             get => _percentageComplete;
-            set => SetProperty(ref _percentageComplete, value);
+            set  
+            { 
+                if((_percentageComplete == 100 && value == 0)
+                    || (_percentageComplete == 0 && value == 100))
+                {
+                    return;
+                }
+                SetProperty(ref _percentageComplete, value); 
+            }
         }
 
         public string FinaliseButtonLabel
@@ -92,6 +101,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
             EventAggregator = eventAggregator ?? throw new ArgumentNullException(nameof(eventAggregator));
             StartCommand = new DelegateCommand(Start);
             FinaliseCommand = new DelegateCommand(Finalise);
+
             if(Application.Current.Resources.TryGetValue("Colour-Blue", out var blue))
             {
                 EvenColour = (Color)blue;
@@ -119,7 +129,15 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
             Timer.TimeChanged += () =>
             {
                 TimeRemaining = Timer.TimeLeftMsStr;
-                PercentageComplete = Timer.PercentageComplete;
+
+                if (_clockwise)
+                {
+                    PercentageComplete = 100 - Timer.PercentageComplete;
+                }
+                else
+                {
+                    PercentageComplete = Timer.PercentageComplete;
+                }
             };
 
             Timer.CountDownFinished += () => OnCountDownFinish();
@@ -198,38 +216,39 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
             Timer.SetTime(new DateTime(1, 1, 1, 0, timespan.Minutes, timespan.Seconds));
 
             TimeRemaining = Timer.TimeLeftMsStr;
-            PercentageComplete = 100;
 
             if (_started)
             {
                 Timer.Start();
             }
-            SetColours();
+            SetAlternative();
         }
 
-        private void SetColours()
+        private void SetAlternative()
         {
             if (_compleatedIntervals.Count % 2 == 0)
             {
-                if (Application.Current.Resources.TryGetValue("Colour-Blue", out var blue))
+                _clockwise = false;
+                /*if (Application.Current.Resources.TryGetValue("Colour-Blue", out var blue))
                 {
                     EvenColour = (Color)blue;
                 }
                 if (Application.Current.Resources.TryGetValue("Colour-Red", out var red))
                 {
                     OddColour = (Color)red;
-                }
+                }*/
             }
             else
             {
-                if (Application.Current.Resources.TryGetValue("Colour-Red", out var red))
+                _clockwise = true;
+                /*if (Application.Current.Resources.TryGetValue("Colour-Red", out var red))
                 {
                     EvenColour = (Color)red;
                 }
                 if (Application.Current.Resources.TryGetValue("Colour-Blue", out var blue))
                 {
                     OddColour = (Color)blue;
-                }
+                }*/
             }
         }
 

@@ -23,7 +23,7 @@
                                  RimThickness="20"
                                  RadiusFactor="1"
                                  RimColor="{Binding EvenColour}"
-                                 StartAngle="0"
+                                 StartAngle="270"
                                  SweepAngle="360"
                                  StartValue="0"
                                  EndValue="100"
