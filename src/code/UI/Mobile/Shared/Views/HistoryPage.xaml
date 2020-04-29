@@ -12,6 +12,7 @@
     <ContentPage.Content>
 
         <syncfusion:SfListView ItemsSource="{Binding History}"
+                               SelectionMode="None"
                                ItemSize="100">
             <syncfusion:SfListView.ItemTemplate>
                 <DataTemplate>

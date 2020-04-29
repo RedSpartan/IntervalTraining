@@ -96,12 +96,12 @@
                                 
                                 <Grid HorizontalOptions="CenterAndExpand">
                                     <Label Text="{Binding IntervalType}"
-                                       Style="{StaticResource Key=LargeTextLabel}"
-                                       Grid.Row="0"
-                                       Grid.Column="1" />
+                                           Style="{StaticResource Key=LargeTextLabel}"
+                                           Grid.Row="0"
+                                           Grid.Column="1" />
 
                                     <Label Grid.Row="1"
-                                       Grid.Column="1">
+                                           Grid.Column="1">
                                         <Label.FormattedText>
                                             <FormattedString>
                                                 <FormattedString.Spans>

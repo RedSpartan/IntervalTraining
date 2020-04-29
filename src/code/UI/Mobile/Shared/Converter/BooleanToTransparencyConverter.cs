@@ -14,7 +14,7 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.Converter
             {
                 if (isTrue)
                 {
-                    return Color.FromHex("#003333");
+                    return color;
                 }
                 else
                 {

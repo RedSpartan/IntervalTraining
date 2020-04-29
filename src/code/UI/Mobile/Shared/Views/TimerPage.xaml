@@ -59,6 +59,7 @@
                 </StackLayout>
 
                 <syncfusion:SfListView ItemsSource="{Binding Queue}"
+                                       SelectionMode="None"
                                        AutoFitMode="Height"
                                        Grid.Row="2"
                                        Grid.ColumnSpan="2">
