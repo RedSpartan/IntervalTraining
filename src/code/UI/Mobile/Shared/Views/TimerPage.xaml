@@ -22,7 +22,7 @@
                                  ShowTicks="False"
                                  RimThickness="20"
                                  RadiusFactor="1"
-                                 RimColor="{StaticResource Key=Colour-Blue}"
+                                 RimColor="{Binding EvenColour}"
                                  StartAngle="0"
                                  SweepAngle="360"
                                  StartValue="0"
@@ -34,7 +34,7 @@
                                                 Thickness="20"
                                                 RangeCap="None"
                                                 AnimationDuration=".1"
-                                                Color="{StaticResource Key=Colour-Red}" />
+                                                Color="{Binding OddColour}" />
                         </gauge:Scale.Pointers>
                     </gauge:Scale>
                 </gauge:SfCircularGauge.Scales>

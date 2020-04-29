@@ -7,6 +7,7 @@ using RedSpartan.IntervalTraining.UI.Mobile.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
 {
@@ -20,6 +21,8 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
         private bool _finished = false;
         private string _finaliseButtonLabel = "Close";
         private double _percentageComplete;
+        private Color _evenColour;
+        private Color _oddColour;
         private readonly History _history = new History();
         private readonly Stack<Interval> _compleatedIntervals = new Stack<Interval>();
         #endregion  Fields
@@ -43,16 +46,28 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
             set => SetProperty(ref _timeRemaining, value);
         }
 
-        public double PercentageComplete 
-        { 
-            get => _percentageComplete; 
-            set => SetProperty(ref _percentageComplete, value); 
+        public double PercentageComplete
+        {
+            get => _percentageComplete;
+            set => SetProperty(ref _percentageComplete, value);
         }
 
         public string FinaliseButtonLabel
         {
             get => _finaliseButtonLabel;
             set => SetProperty(ref _finaliseButtonLabel, value);
+        }
+
+        public Color EvenColour 
+        { 
+            get => _evenColour; 
+            set => SetProperty(ref _evenColour, value); 
+        }
+
+        public Color OddColour 
+        { 
+            get => _oddColour; 
+            set => SetProperty(ref _oddColour, value); 
         }
         #endregion Properties
 
@@ -77,6 +92,14 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
             EventAggregator = eventAggregator ?? throw new ArgumentNullException(nameof(eventAggregator));
             StartCommand = new DelegateCommand(Start);
             FinaliseCommand = new DelegateCommand(Finalise);
+            if(Application.Current.Resources.TryGetValue("Colour-Blue", out var blue))
+            {
+                EvenColour = (Color)blue;
+            }
+            if (Application.Current.Resources.TryGetValue("Colour-Red", out var red))
+            {
+                OddColour = (Color)red;
+            }
         }
         #endregion Constructors
 
@@ -180,6 +203,33 @@ namespace RedSpartan.IntervalTraining.UI.Mobile.Shared.ViewModels
             if (_started)
             {
                 Timer.Start();
+            }
+            SetColours();
+        }
+
+        private void SetColours()
+        {
+            if (_compleatedIntervals.Count % 2 == 0)
+            {
+                if (Application.Current.Resources.TryGetValue("Colour-Blue", out var blue))
+                {
+                    EvenColour = (Color)blue;
+                }
+                if (Application.Current.Resources.TryGetValue("Colour-Red", out var red))
+                {
+                    OddColour = (Color)red;
+                }
+            }
+            else
+            {
+                if (Application.Current.Resources.TryGetValue("Colour-Red", out var red))
+                {
+                    EvenColour = (Color)red;
+                }
+                if (Application.Current.Resources.TryGetValue("Colour-Blue", out var blue))
+                {
+                    OddColour = (Color)blue;
+                }
             }
         }
 
